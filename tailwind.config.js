@@ -16,6 +16,15 @@ module.exports = {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                primary: '#2563EB',
+            },
+            spacing: {
+                18: '4.5rem',
+            },
+            maxWidth: {
+                '8xl': '85rem',
+            },
         },
     },
     plugins: [require('@tailwindcss/typography')],

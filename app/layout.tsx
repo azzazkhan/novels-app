@@ -1,9 +1,17 @@
 import type { FC } from 'react';
-import { Inter } from 'next/font/google';
-import './globals.css';
-import ReduxProvider from 'store/ReduxProvider';
+import { Nunito } from 'next/font/google';
+import { ReduxProvider } from 'providers';
+import { Header } from 'components/layout';
+import 'styles/tailwind.css';
+import classNames from 'classnames';
+import MantineProvider from 'providers/MantineProvider';
 
-const inter = Inter({ subsets: ['latin'] });
+const nunito = Nunito({
+    subsets: ['latin'],
+    weight: ['400', '500', '600', '700'],
+    display: 'swap',
+    preload: true,
+});
 
 interface Props {
     children: React.ReactNode;
@@ -12,8 +20,13 @@ interface Props {
 const RootLayout: FC<Props> = ({ children }) => {
     return (
         <html lang="en">
-            <body className={inter.className}>
-                <ReduxProvider>{children}</ReduxProvider>
+            <body className={classNames(nunito.className, 'min-h-screen !overflow-x-hidden')}>
+                <ReduxProvider>
+                    <MantineProvider>
+                        <Header />
+                        <main>{children}</main>
+                    </MantineProvider>
+                </ReduxProvider>
             </body>
         </html>
     );

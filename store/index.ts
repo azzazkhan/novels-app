@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { layout } from './slices';
+import { layout, search } from './slices';
 
 export const store = configureStore({
     reducer: {
         layout,
+        search,
     },
     devTools: process.env.NODE_ENV !== 'production',
 });
