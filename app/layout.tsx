@@ -1,10 +1,11 @@
 import type { FC } from 'react';
 import { Nunito } from 'next/font/google';
+import MantineProvider from 'providers/MantineProvider';
+import classNames from 'classnames';
 import { ReduxProvider } from 'providers';
 import { Header } from 'components/layout';
 import 'styles/tailwind.css';
-import classNames from 'classnames';
-import MantineProvider from 'providers/MantineProvider';
+import 'styles/app.scss';
 
 const nunito = Nunito({
     subsets: ['latin'],

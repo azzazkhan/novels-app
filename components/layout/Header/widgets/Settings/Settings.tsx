@@ -2,15 +2,14 @@
 
 import { FC, MouseEventHandler, useState } from 'react';
 import Image from 'next/image';
-import settings from 'assets/icons/settings.svg';
 import { useClickOutside } from '@mantine/hooks';
-import Dropdown from '../Dropdown';
-import { RadioGroup, Switch } from '@headlessui/react';
+import { RadioGroup } from '@headlessui/react';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { toggleDarkMode } from 'store/slices';
-import classNames from 'classnames';
+import Dropdown from '../Dropdown';
 import DarkModeToggler from './DarkModeToggler';
 import SelectionAction from './SelectionAction';
+import settings from 'assets/icons/settings.svg';
 
 const Settings: FC = () => {
     const dispatch = useAppDispatch();
@@ -22,7 +21,7 @@ const Settings: FC = () => {
     const handleTriggerClick: MouseEventHandler<HTMLButtonElement> = (event) => {
         event.preventDefault();
 
-        setOpened(true);
+        setOpened((current) => !current);
     };
 
     const handleDarkModeClick: MouseEventHandler<HTMLAnchorElement> = (event) => {
@@ -43,7 +42,7 @@ const Settings: FC = () => {
 
             {/* Theme */}
             {/* Preference */}
-            <Dropdown opened={opened} className="py-2.5 min-w-[15rem]">
+            <Dropdown opened={opened} className="py-2.5 min-w-[20rem]">
                 <DarkModeToggler enabled={darkMode} toggle={handleDarkModeClick} />
 
                 <div className="flex flex-col space-y-1 mt-4">
@@ -57,12 +56,16 @@ const Settings: FC = () => {
                         >
                             <RadioGroup.Option value="male">
                                 {({ checked }) => (
-                                    <SelectionAction checked={checked}>Male Lead</SelectionAction>
+                                    <SelectionAction checked={checked} label="Male Lead">
+                                        More fiction in contemporary and other romance
+                                    </SelectionAction>
                                 )}
                             </RadioGroup.Option>
                             <RadioGroup.Option value="female">
                                 {({ checked }) => (
-                                    <SelectionAction checked={checked}>Female Lead</SelectionAction>
+                                    <SelectionAction checked={checked} label="Female Lead">
+                                        More fiction in fantasy, games and magical realism
+                                    </SelectionAction>
                                 )}
                             </RadioGroup.Option>
                         </RadioGroup>

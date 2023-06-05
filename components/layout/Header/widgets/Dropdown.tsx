@@ -18,9 +18,13 @@ interface Props
     className?: ClassName;
     opened?: boolean;
     children?: ReactNode;
+    chevron?: 'left' | 'right' | false;
 }
 
-const Dropdown: ForwardRefRenderFunction<Ref, Props> = ({ opened, className, children }, ref) => {
+const Dropdown: ForwardRefRenderFunction<Ref, Props> = (
+    { opened, chevron = 'right', className, children },
+    ref
+) => {
     return (
         <div
             className={classNames(
@@ -31,7 +35,17 @@ const Dropdown: ForwardRefRenderFunction<Ref, Props> = ({ opened, className, chi
             )}
             ref={ref as unknown as Ref}
         >
-            <span className="absolute -top-2 right-8 h-4 w-4 bg-white transform rotate-45 border-t border-l border-gray-200" />
+            {chevron && (
+                <span
+                    className={classNames(
+                        'absolute -top-2 h-4 w-4 bg-white transform rotate-45 border-t border-l border-gray-200',
+                        {
+                            'right-8': chevron === 'right',
+                            'left-8': chevron === 'left',
+                        }
+                    )}
+                />
+            )}
             {children}
         </div>
     );
