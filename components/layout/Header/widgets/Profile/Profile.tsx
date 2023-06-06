@@ -13,7 +13,7 @@ import Badge from './Badge';
 import items from './items';
 
 const Profile: FC = () => {
-    const [opened, setOpened] = useState(true);
+    const [opened, setOpened] = useState(false);
     const ref = useClickOutside(() => setOpened(false));
 
     const handleTriggerClick: MouseEventHandler<HTMLButtonElement> = (event) => {
@@ -27,7 +27,7 @@ const Profile: FC = () => {
             <button
                 type="button"
                 onClick={handleTriggerClick}
-                className="relative flex items-center justify-center w-10 h-10 bg-gray-300 rounded-full cursor-pointer"
+                className="relative items-center justify-center hidden w-10 h-10 bg-gray-300 rounded-full cursor-pointer lg:flex"
             >
                 <Image src={avatar} height={40} className="rounded-full" alt="Avatar" />
                 <span className="absolute top-0 right-0 block w-2.5 h-2.5 bg-red-500 rounded-full b-2" />
@@ -36,14 +36,14 @@ const Profile: FC = () => {
             <Dropdown
                 opened={opened}
                 chevronClassName="z-[-1]"
-                className="min-w-[18rem] flex flex-col space-y-2.5"
+                className="lg:min-w-[18rem] flex flex-col space-y-2.5 mt-6 lg:m-0"
             >
                 {/* Profile */}
                 <div
-                    className="!mt-0 rounded-t-xl overflow-hidden bg-cover bg-center"
+                    className="!mt-0 overflow-hidden bg-cover bg-center mx-2.5 rounded-xl lg:mx-0 lg:rounded-none lg:rounded-t-xl"
                     style={{ backgroundImage: `url('${background.src}')` }}
                 >
-                    <div className="flex items-center justify-between space-x-2.5 group p-5 cursor-pointer select-none transition-colors bg-black/10 hover:bg-black/40 duration-300">
+                    <div className="flex items-center justify-between space-x-2.5 group p-5 cursor-pointer select-none transition-colors bg-black/10 hover:bg-black/40 duration-300 h-full">
                         <div className="flex-grow-0 flex-shrink-0 overflow-hidden rounded-full">
                             <Image src={avatar} height={40} className="rounded-full" alt="Avatar" />
                         </div>
@@ -60,7 +60,7 @@ const Profile: FC = () => {
                 <div className="flex justify-between items-center space-x-2.5 px-5 select-none">
                     <div className="flex space-x-1.5">
                         <Image src={coin} height={24} className="object-contain" alt="Coin" />
-                        <span className="text-lg font-bold">0</span>
+                        <span className="text-lg font-bold">3.9K</span>
                     </div>
                     <Link
                         href="/shop/coins"
@@ -78,7 +78,7 @@ const Profile: FC = () => {
                                 className="flex items-center px-5 py-2.5 space-x-2 transition-colors hover:bg-gray-100 relative"
                                 key={idx}
                             >
-                                <span className="font-medium">{label}</span>
+                                <span className="lg:font-medium">{label}</span>
 
                                 {badge && <Badge>{badge}</Badge>}
                             </Link>
@@ -87,7 +87,7 @@ const Profile: FC = () => {
 
                     <a
                         role="link"
-                        className="flex items-center px-5 py-3 space-x-2 text-red-600 transition-colors cursor-pointer hover:bg-red-100 rounded-b-xl"
+                        className="flex items-center px-5 py-3 space-x-2 text-red-600 transition-colors cursor-pointer hover:bg-red-100 lg:rounded-b-xl"
                     >
                         <span className="font-medium">Logout</span>
                     </a>

@@ -1,0 +1,34 @@
+@font-face {
+    font-family: 'Anicons Regular';
+    src: url('../../assets/fonts/anicons.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@keyframes animateAnicon {
+    0% {
+        font-variation-settings: 'TIME' 1;
+    }
+    100% {
+        font-variation-settings: 'TIME' 100;
+    }
+}
+
+.anicon {
+    font-family: 'Anicons Regular', sans-serif;
+    font-variation-settings: 'TIME' 1;
+    &:not(.no-animation) {
+        &:not(.toggle-once) {
+            transition: font-variation-settings 0.4s ease;
+        }
+        &.toggled {
+            &.toggle-once {
+                transition: font-variation-settings 0.4s ease;
+            }
+            font-variation-settings: 'TIME' 100;
+        }
+    }
+    &.no-animation.toggled {
+        font-variation-settings: 'TIME' 100;
+    }
+}

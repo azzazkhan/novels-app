@@ -1,39 +1,29 @@
 import type { FC } from 'react';
 import Link from 'next/link';
-import { faBarsStaggered, faCompass, faPenNib } from '@fortawesome/free-solid-svg-icons';
 import { Container } from 'components/common';
-import Settings from './widgets/Settings';
-import Profile from './widgets/Profile';
+import Nav from './Nav';
+import Hamburger from './Hamburger';
 import Search from './widgets/Search';
-import NavItem from './NavItem';
 
 const Header: FC = () => {
     return (
-        <header className="h-16 shadow-md">
-            <Container className="flex items-center h-full space-x-20" wrapperClassName="h-full">
+        <header className="z-10 w-full h-16 shadow-md">
+            <Container
+                className="flex items-center justify-between h-full space-x-4 lg:space-x-20 lg:justify-start"
+                wrapperClassName="h-full"
+            >
                 <Link href="/" className="text-2xl font-bold text-primary">
                     {process.env.NEXT_PUBLIC_APP_NAME}
                 </Link>
 
-                <nav className="flex items-center justify-between flex-1">
-                    <ul className="flex items-center space-x-2">
-                        <NavItem href="/" icon={faCompass}>
-                            Browse
-                        </NavItem>
-                        <NavItem href="/rankings" icon={faBarsStaggered}>
-                            Rankings
-                        </NavItem>
-                        <NavItem href="/create" icon={faPenNib}>
-                            Create
-                        </NavItem>
-                    </ul>
+                <Search
+                    className="flex-1 hidden list-none sm:block md:hidden"
+                    inputClassName="w-full"
+                />
 
-                    <ul className="flex items-center space-x-2.5">
-                        <Search />
-                        <Settings />
-                        <Profile />
-                    </ul>
-                </nav>
+                <Nav />
+
+                <Hamburger />
             </Container>
         </header>
     );

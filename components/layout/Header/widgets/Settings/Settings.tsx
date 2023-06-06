@@ -35,12 +35,12 @@ const Settings: FC = () => {
             <button
                 type="button"
                 onClick={handleTriggerClick}
-                className="flex items-center justify-center w-10 h-10 overflow-hidden transition-colors rounded-full cursor-pointer hover:bg-gray-100"
+                className="items-center justify-center hidden w-10 h-10 overflow-hidden transition-colors rounded-full cursor-pointer lg:flex hover:bg-gray-100"
             >
                 <Image src={settings} height={24} alt="Avatar" />
             </button>
 
-            <Dropdown opened={opened} className="py-2.5 min-w-[20rem]">
+            <Dropdown opened={opened} className="py-2.5 lg:min-w-[20rem]">
                 <DarkModeToggler enabled={darkMode} toggle={handleDarkModeClick} />
 
                 <div className="flex flex-col mt-4 space-y-1">

@@ -29,9 +29,10 @@ const Dropdown: ForwardRefRenderFunction<Ref, Props> = (
     return (
         <div
             className={classNames(
-                'absolute top-[calc(100%+0.75rem)] -right-5 max-h-[24rem] min-h-[3rem] max-w-min min-w-[10rem] shadow-lg bg-white border border-gray-200 rounded-xl transition-all duration-300',
-                { 'invisible opacity-0 -translate-y-5': !opened },
-                { 'visible opacity-100 translate-y-0': opened },
+                '',
+                'lg:absolute lg:top-[calc(100%+0.75rem)] lg:-right-5 lg:max-h-[24rem] lg:min-h-[3rem] lg:max-w-min lg:min-w-[10rem] lg:shadow-lg lg:bg-white lg:border lg:border-gray-200 lg:rounded-xl lg:transition-all lg:duration-300',
+                { 'lg:invisible lg:opacity-0 lg:-translate-y-5': !opened },
+                { 'lg:visible lg:opacity-100 lg:translate-y-0': opened },
                 className
             )}
             ref={ref as unknown as Ref}
@@ -39,7 +40,7 @@ const Dropdown: ForwardRefRenderFunction<Ref, Props> = (
             {chevron && (
                 <span
                     className={classNames(
-                        'absolute -top-2 h-4 w-4 bg-white transform rotate-45 border-t border-l border-gray-200',
+                        'hidden lg:block absolute -top-2 h-4 w-4 bg-white transform rotate-45 border-t border-l border-gray-200',
                         {
                             'right-8': chevron === 'right',
                             'left-8': chevron === 'left',
