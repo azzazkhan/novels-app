@@ -2,10 +2,10 @@ import type { FC } from 'react';
 import Link from 'next/link';
 import { faBarsStaggered, faCompass, faPenNib } from '@fortawesome/free-solid-svg-icons';
 import { Container } from 'components/common';
-import { Settings } from './widgets/Settings';
-import NavItem from './NavItem';
-import Search from './widgets/Search';
+import Settings from './widgets/Settings';
 import Profile from './widgets/Profile';
+import Search from './widgets/Search';
+import NavItem from './NavItem';
 
 const Header: FC = () => {
     return (

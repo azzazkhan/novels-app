@@ -4,13 +4,13 @@ import { FC, MouseEventHandler, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useClickOutside } from '@mantine/hooks';
-import Dropdown from './Dropdown';
+import Dropdown from '../Dropdown';
 // Assets
 import avatar from 'assets/icons/avatar.jpg';
 import coin from 'assets/icons/coin-32.png';
-import bell from 'assets/icons/bell-24.png';
-import moneyBag from 'assets/icons/money-bag-2-24.png';
 import background from 'assets/covers/wp5208295.png';
+import Badge from './Badge';
+import items from './items';
 
 const Profile: FC = () => {
     const [opened, setOpened] = useState(true);
@@ -27,9 +27,10 @@ const Profile: FC = () => {
             <button
                 type="button"
                 onClick={handleTriggerClick}
-                className="flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-300 rounded-full cursor-pointer"
+                className="relative flex items-center justify-center w-10 h-10 bg-gray-300 rounded-full cursor-pointer"
             >
                 <Image src={avatar} height={40} className="rounded-full" alt="Avatar" />
+                <span className="absolute top-0 right-0 block w-2.5 h-2.5 bg-red-500 rounded-full b-2" />
             </button>
 
             <Dropdown
@@ -69,26 +70,20 @@ const Profile: FC = () => {
                     </Link>
                 </div>
 
-                <div className="flex flex-col space-y-1">
-                    <Link
-                        href="/notifications"
-                        className="flex items-center px-5 py-2.5 space-x-2 transition-colors hover:bg-gray-100 relative"
-                    >
-                        <Image src={bell} alt="Bell" />
-                        <span className="font-medium">Notifications</span>
+                <div className="flex flex-col">
+                    {items.map(({ label, url, badge }, idx) => {
+                        return (
+                            <Link
+                                href={url}
+                                className="flex items-center px-5 py-2.5 space-x-2 transition-colors hover:bg-gray-100 relative"
+                                key={idx}
+                            >
+                                <span className="font-medium">{label}</span>
 
-                        <span className="absolute inline-flex items-center h-5 px-2 font-bold text-white uppercase transform -translate-y-1/2 bg-red-500 rounded-full text-xxs right-5 top-1/2">
-                            New
-                        </span>
-                    </Link>
-
-                    <Link
-                        href="/earnings"
-                        className="flex items-center px-5 py-2.5 space-x-2 transition-colors hover:bg-gray-100"
-                    >
-                        <Image src={moneyBag} alt="Bell" />
-                        <span className="font-medium">My Earnings</span>
-                    </Link>
+                                {badge && <Badge>{badge}</Badge>}
+                            </Link>
+                        );
+                    })}
 
                     <a
                         role="link"
