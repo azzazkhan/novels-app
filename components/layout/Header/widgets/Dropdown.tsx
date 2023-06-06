@@ -19,10 +19,11 @@ interface Props
     opened?: boolean;
     children?: ReactNode;
     chevron?: 'left' | 'right' | false;
+    chevronClassName?: ClassName;
 }
 
 const Dropdown: ForwardRefRenderFunction<Ref, Props> = (
-    { opened, chevron = 'right', className, children },
+    { opened, chevron = 'right', chevronClassName, className, children },
     ref
 ) => {
     return (
@@ -42,7 +43,8 @@ const Dropdown: ForwardRefRenderFunction<Ref, Props> = (
                         {
                             'right-8': chevron === 'right',
                             'left-8': chevron === 'left',
-                        }
+                        },
+                        chevronClassName
                     )}
                 />
             )}

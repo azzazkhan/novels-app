@@ -1,18 +1,11 @@
 import type { FC } from 'react';
-import { Nunito } from 'next/font/google';
 import MantineProvider from 'providers/MantineProvider';
 import classNames from 'classnames';
 import { ReduxProvider } from 'providers';
 import { Header } from 'components/layout';
+import { nunito } from './fonts';
 import 'styles/tailwind.css';
 import 'styles/app.scss';
-
-const nunito = Nunito({
-    subsets: ['latin'],
-    weight: ['400', '500', '600', '700'],
-    display: 'swap',
-    preload: true,
-});
 
 interface Props {
     children: React.ReactNode;
@@ -34,7 +27,11 @@ const RootLayout: FC<Props> = ({ children }) => {
 };
 
 export const metadata = {
-    title: process.env.NEXT_PUBLIC_APP_NAME,
+    title: {
+        template: `%s — ${process.env.NEXT_PUBLIC_APP_NAME}`,
+        default: process.env.NEXT_PUBLIC_APP_NAME || '',
+        absolute: process.env.NEXT_PUBLIC_APP_NAME,
+    },
     description: process.env.NEXT_PUBLIC_APP_DESCRIPTION,
 };
 
