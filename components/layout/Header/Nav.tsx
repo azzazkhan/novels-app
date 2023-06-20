@@ -7,10 +7,14 @@ import Settings from './widgets/Settings';
 import Profile from './widgets/Profile';
 import Search from './widgets/Search';
 import NavItem from './NavItem';
-import { useAppSelector } from 'hooks';
+import { useAppDispatch, useAppSelector } from 'hooks';
+import { useClickOutside } from '@mantine/hooks';
+import { toggleNavbar } from 'store/slices';
 
 const Nav: FC = () => {
+    const dispatch = useAppDispatch();
     const opened = useAppSelector((state) => state.layout.navbarOpened);
+    const ref = useClickOutside(() => dispatch(toggleNavbar(false)));
 
     return (
         <div
@@ -21,6 +25,7 @@ const Nav: FC = () => {
             )}
         >
             <nav
+                ref={ref}
                 className={classNames(
                     'flex flex-col h-full bg-white transition transform w-full sm:max-w-sm duration-300 shadow pt-2.5 pb-5',
                     { 'translate-x-full': !opened, 'translate-x-0': opened },

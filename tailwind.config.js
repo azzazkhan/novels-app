@@ -12,6 +12,13 @@ module.exports = {
         'app/**/*.{ts,tsx,mdx}',
     ],
     theme: {
+        container: {
+            center: true,
+            padding: '2rem',
+            screens: {
+                '2xl': '1400px',
+            },
+        },
         extend: {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
@@ -26,10 +33,19 @@ module.exports = {
             spacing: {
                 18: '4.5rem',
             },
-            maxWidth: {
-                '8xl': '85rem',
+            keyframes: {
+                pop: {
+                    '0%, 100%': { transform: 'scale(1)' },
+                    '50%': { transform: 'scale(0.85)' },
+                },
+            },
+            animation: {
+                pop: 'pop 300ms ease',
             },
         },
     },
-    plugins: [require('@tailwindcss/typography')],
+    daisyui: {
+        themes: [],
+    },
+    plugins: [require('@tailwindcss/typography'), require('daisyui')],
 };

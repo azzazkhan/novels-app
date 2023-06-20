@@ -1,11 +1,7 @@
 'use client';
 
-import type { FC, ReactNode } from 'react';
-import { MantineProvider as Provider } from '@mantine/core';
-
-interface Props {
-    children?: ReactNode;
-}
+import type { FC } from 'react';
+import { MantineProvider as Provider, MantineProviderProps as Props } from '@mantine/core';
 
 const MantineProvider: FC<Props> = ({ children }) => {
     return <Provider>{children}</Provider>;

@@ -75,7 +75,7 @@ const Profile: FC = () => {
                         return (
                             <Link
                                 href={url}
-                                className="flex items-center px-5 py-2.5 space-x-2 transition-colors hover:bg-gray-100 relative"
+                                className="flex items-center px-5 py-2 space-x-2 transition-colors hover:bg-gray-100 relative"
                                 key={idx}
                             >
                                 <span className="lg:font-medium">{label}</span>
