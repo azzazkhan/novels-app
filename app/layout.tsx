@@ -3,7 +3,7 @@ import MantineProvider from 'providers/MantineProvider';
 import classNames from 'classnames';
 import { ReduxProvider } from 'providers';
 import { Header } from 'components/layout';
-import { nunito } from './fonts';
+import { nunito, merienda } from './fonts';
 import 'styles/tailwind.css';
 import 'styles/app.scss';
 
@@ -15,12 +15,16 @@ const RootLayout: FC<Props> = ({ children }) => {
     return (
         <html lang="en">
             <body
-                className={classNames(nunito.className, 'min-h-screen !overflow-x-hidden w-screen')}
+                className={classNames(
+                    nunito.className,
+                    merienda.variable,
+                    'min-h-screen !overflow-x-hidden w-screen'
+                )}
             >
                 <ReduxProvider>
                     <MantineProvider>
                         <Header />
-                        <main>{children}</main>
+                        <main className="pt-16">{children}</main>
                     </MantineProvider>
                 </ReduxProvider>
             </body>

@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 'use client';
 
 import React, { FC } from 'react';
@@ -8,16 +10,24 @@ import Profile from './widgets/Profile';
 import Search from './widgets/Search';
 import NavItem from './NavItem';
 import { useAppDispatch, useAppSelector } from 'hooks';
-import { useClickOutside } from '@mantine/hooks';
+import { useEventListener } from '@mantine/hooks';
 import { toggleNavbar } from 'store/slices';
 
 const Nav: FC = () => {
     const dispatch = useAppDispatch();
     const opened = useAppSelector((state) => state.layout.navbarOpened);
-    const ref = useClickOutside(() => dispatch(toggleNavbar(false)));
+    const ref = useEventListener('click', (event) => {
+        // Continue if only overlay was clicked, not any of its children
+        if (event.target !== ref.current) return;
+
+        event.stopPropagation(); // Prevent from bubbling up the DOM tree
+        event.preventDefault(); // Prevent any redirects
+        dispatch(toggleNavbar(false));
+    });
 
     return (
         <div
+            ref={ref}
             className={classNames(
                 'fixed right-0 flex-1 w-full h-full bg-black/20 top-16 transition-all duration-500 backdrop-blur-md flex justify-end',
                 'lg:static lg:bg-transparent lg:transform-none lg:!opacity-100 lg:!visible lg:backdrop-blur-none',
@@ -25,7 +35,7 @@ const Nav: FC = () => {
             )}
         >
             <nav
-                ref={ref}
+                onClick={(event) => event.stopPropagation()}
                 className={classNames(
                     'flex flex-col h-full bg-white transition transform w-full sm:max-w-sm duration-300 shadow pt-2.5 pb-5',
                     { 'translate-x-full': !opened, 'translate-x-0': opened },

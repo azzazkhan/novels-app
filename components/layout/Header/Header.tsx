@@ -7,7 +7,7 @@ import Search from './widgets/Search';
 
 const Header: FC = () => {
     return (
-        <header className="w-full h-16 fixed top-0 z-10 border-b border-gray-200">
+        <header className="fixed top-0 z-10 w-full h-16 bg-white border-b border-gray-200">
             <Container
                 className="flex items-center justify-between h-full space-x-4 lg:space-x-20 lg:justify-start"
                 wrapperClassName="h-full"

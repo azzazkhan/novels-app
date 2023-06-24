@@ -8,7 +8,7 @@ import Dropdown from '../Dropdown';
 // Assets
 import avatar from 'assets/icons/avatar.jpg';
 import coin from 'assets/icons/coin-32.png';
-import background from 'assets/covers/wp5208295.png';
+import background from 'assets/images/covers/shooting-stars-dark-sky-girl.png';
 import Badge from './Badge';
 import items from './items';
 
@@ -40,9 +40,15 @@ const Profile: FC = () => {
             >
                 {/* Profile */}
                 <div
-                    className="!mt-0 overflow-hidden bg-cover bg-center mx-2.5 rounded-xl lg:mx-0 lg:rounded-none lg:rounded-t-xl"
+                    className="relative !mt-0 overflow-hidden bg-cover bg-center mx-2.5 rounded-xl lg:mx-0 lg:rounded-none lg:rounded-t-xl"
                     style={{ backgroundImage: `url('${background.src}')` }}
                 >
+                    <Image
+                        src={background}
+                        fill
+                        className="absolute z-[-1] top-0 left-0 h-full w-full object-cover object-center"
+                        alt="Cover Photo"
+                    />
                     <div className="flex items-center justify-between space-x-2.5 group p-5 cursor-pointer select-none transition-colors bg-black/10 hover:bg-black/40 duration-300 h-full">
                         <div className="flex-grow-0 flex-shrink-0 overflow-hidden rounded-full">
                             <Image src={avatar} height={40} className="rounded-full" alt="Avatar" />
@@ -75,7 +81,7 @@ const Profile: FC = () => {
                         return (
                             <Link
                                 href={url}
-                                className="flex items-center px-5 py-2 space-x-2 transition-colors hover:bg-gray-100 relative"
+                                className="relative flex items-center px-5 py-2 space-x-2 transition-colors hover:bg-gray-100"
                                 key={idx}
                             >
                                 <span className="lg:font-medium">{label}</span>

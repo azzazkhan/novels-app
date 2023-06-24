@@ -22,6 +22,7 @@ module.exports = {
         extend: {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+                special: ['var(--font-merienda)'],
             },
             fontSize: {
                 xxxs: '.5rem',
@@ -44,8 +45,8 @@ module.exports = {
             },
         },
     },
-    daisyui: {
-        themes: [],
+    future: {
+        hoverOnlyWhenSupported: true,
     },
-    plugins: [require('@tailwindcss/typography'), require('daisyui')],
+    plugins: [require('@tailwindcss/typography')],
 };

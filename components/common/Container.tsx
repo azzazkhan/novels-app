@@ -10,7 +10,7 @@ interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'className'> {
 
 const Container: FC<Props> = ({ wrapperClassName, noMargins, className, children, ...props }) => {
     return (
-        <div className={classNames('mx-auto max-w-8xl', wrapperClassName)} {...props}>
+        <div className={classNames('mx-auto max-w-[95%]', wrapperClassName)} {...props}>
             <div
                 className={classNames({ 'mx-4 sm:mx-6 md:mx-10 lg:mx-20': !noMargins }, className)}
             >
