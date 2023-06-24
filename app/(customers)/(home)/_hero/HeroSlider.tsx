@@ -33,7 +33,7 @@ const HeroSlider: FC<Props> = (props) => {
                 }}
                 autoplay={{ delay: 7000, disableOnInteraction: false, pauseOnMouseEnter: true }}
                 speed={700}
-                className="relative overflow-x-hidden aspect-[16/7] rounded-xl md:rounded-2xl"
+                className="relative overflow-x-hidden aspect-[16/7] rounded-xl md:rounded-2xl min-h-[14rem] w-full"
                 spaceBetween={50}
                 slidesPerView={1}
                 virtual={{ addSlidesAfter: 1, addSlidesBefore: 1 }}

@@ -19,7 +19,7 @@ interface Novel {
     alt_title?: string;
     slug: string;
     type: string;
-    authors?: Author[];
+    author?: Author;
     completed: boolean;
     rank: number;
     rating: number;
@@ -34,13 +34,11 @@ const novels: Novel[] = [
         image: theBeginningAfterTheEnd,
         slug: 'the-beginning-after-the-end',
         type: 'Web Novel',
-        authors: [
-            {
-                name: 'TurtleMe',
-                alt_name: '漫客文化',
-                url: 'https://www.animemanganovels.org/authors/turtleme',
-            },
-        ],
+        author: {
+            name: 'TurtleMe',
+            alt_name: '漫客文化',
+            url: 'https://www.animemanganovels.org/authors/turtleme',
+        },
         completed: false,
         rank: 1,
         rating: 4.5,

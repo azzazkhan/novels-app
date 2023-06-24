@@ -15,6 +15,7 @@ const SlideItem: FC<Props> = ({ background, title, content, children }) => {
                 src={background}
                 fill
                 className="top-0 left-0 h-full w-full absolute object-cover object-center z-[-1]"
+                placeholder="blur"
                 alt={title}
             />
 

@@ -33,6 +33,10 @@ module.exports = {
             },
             spacing: {
                 18: '4.5rem',
+                76: '19rem',
+                88: '22rem',
+                176: '44rem',
+                192: '48rem',
             },
             keyframes: {
                 pop: {
