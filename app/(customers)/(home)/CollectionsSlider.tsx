@@ -33,7 +33,10 @@ const CollectionsSlider: FC<Props> = ({ className, ...props }) => {
             >
                 {Array.from({ length: 3 }).map((_, idx) => {
                     return (
-                        <SwiperSlide key={idx} className="!h-176 sm:!h-88">
+                        <SwiperSlide
+                            key={idx}
+                            className="!h-176 sm:!h-88 max-sm:px-[calc(2.5%+1rem)]"
+                        >
                             <div className="grid w-full h-full grid-cols-1 gap-6 sm:grid-cols-2">
                                 {novels.slice(0, 4).map((novel, idx) => {
                                     const { title, slug, image, categories } = novel;

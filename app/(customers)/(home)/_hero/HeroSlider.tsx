@@ -3,6 +3,7 @@
 import { DetailedHTMLProps, FC, HTMLAttributes } from 'react';
 import { Pagination, Autoplay, Virtual } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import classNames from 'classnames';
 import { Container } from 'components/common';
 import SlideItem from './SlideItem';
 
@@ -21,9 +22,13 @@ interface Props
     className?: ClassName;
 }
 
-const HeroSlider: FC<Props> = (props) => {
+const HeroSlider: FC<Props> = ({ className, ...props }) => {
     return (
-        <Container {...props}>
+        <Container
+            wrapperClassName="max-sm:max-w-full"
+            className={classNames('max-sm:mx-0', className)}
+            {...props}
+        >
             <Swiper
                 modules={[Autoplay, Virtual, Pagination]}
                 pagination={{
@@ -33,7 +38,7 @@ const HeroSlider: FC<Props> = (props) => {
                 }}
                 autoplay={{ delay: 7000, disableOnInteraction: false, pauseOnMouseEnter: true }}
                 speed={700}
-                className="relative overflow-x-hidden aspect-[16/7] rounded-xl md:rounded-2xl min-h-[14rem] w-full"
+                className="relative overflow-x-hidden aspect-[16/7] sm:rounded-xl md:rounded-2xl min-h-[14rem] w-full"
                 spaceBetween={50}
                 slidesPerView={1}
                 virtual={{ addSlidesAfter: 1, addSlidesBefore: 1 }}

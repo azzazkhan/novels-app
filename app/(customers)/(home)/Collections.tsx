@@ -14,13 +14,14 @@ interface Props {
 const Collections: FC<Props> = ({ className }) => {
     return (
         <Container
+            wrapperClassName="max-sm:max-w-full"
             className={classNames(
-                'grid grid-cols-1 gap-20 lg:grid-cols-5 lg:gap-x-10 xl:gap-x-20 xl:grid-cols-2 select-none',
+                'grid grid-cols-1 gap-20 lg:grid-cols-5 lg:gap-x-10 xl:gap-x-20 xl:grid-cols-2 select-none max-sm:mx-0',
                 className
             )}
         >
             {/* h-96 */}
-            <div className="relative overflow-hidden h-72 xl:h-96 md:h-80 md:mt-4 xl:mt-0 rounded-2xl bg-black/80 lg:col-span-2 xl:col-span-1">
+            <div className="relative overflow-hidden h-72 xl:h-96 md:h-80 md:mt-4 xl:mt-0 rounded-2xl bg-black/80 lg:col-span-2 xl:col-span-1 max-sm:max-w-[95%] max-sm:mx-4">
                 <Image
                     src={background}
                     loading="lazy"
