@@ -1,8 +1,8 @@
 import type { DetailedHTMLProps, FC, HTMLAttributes } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Container } from 'components/common';
 import categories from './categories';
-import Image from 'next/image';
 
 interface Props
     extends Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'className'> {
