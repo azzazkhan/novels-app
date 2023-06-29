@@ -3,6 +3,7 @@ import Page from 'components/common/Page';
 import HeroSlider from './_hero/HeroSlider';
 import NewPublications from './NewPublications';
 import Collections from './Collections';
+import Categories from './Categories';
 
 const Home: FC = () => {
     return (
@@ -10,6 +11,7 @@ const Home: FC = () => {
             <HeroSlider />
             <NewPublications className="mt-24" />
             <Collections className="mt-24" />
+            <Categories className="mt-24" />
         </Page>
     );
 };

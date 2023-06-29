@@ -21,7 +21,7 @@ const NewPublications: FC<Props> = ({ className }) => {
     return (
         <div className={classNames(className)}>
             <Container>
-                <h2 className="mb-4 text-3xl font-bold">New Publications</h2>
+                <h2 className="mb-4 text-2xl md:text-3xl font-bold">New Publications</h2>
             </Container>
 
             <Container wrapperClassName="max-sm:max-w-full" className="max-sm:mx-0">
@@ -35,7 +35,6 @@ const NewPublications: FC<Props> = ({ className }) => {
                             'swiper-pagination-bullet-active !bg-primary !opacity-100',
                     }}
                     modules={[Pagination]}
-                    freeMode
                 >
                     {novels.map((novel, idx) => {
                         const { title, slug, image } = novel;
