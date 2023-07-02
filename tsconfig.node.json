@@ -1,0 +1,26 @@
+{
+    "ts-node": {
+        "require": [
+            "tsconfig-paths/register"
+        ]
+    },
+    "extends": "./tsconfig.dev.json",
+    "compilerOptions": {
+        "lib": [
+            "ESNext"
+        ],
+        "outDir": "dist",
+        "noEmit": false,
+        "module": "CommonJS",
+        "plugins": []
+    },
+    "include": [
+        "application.ts",
+        "lib/**/*.ts",
+        "scripts/**/*.ts",
+        "types/**/*.ts",
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

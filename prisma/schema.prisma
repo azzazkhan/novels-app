@@ -1,0 +1,158 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+    id       BigInt @id @default(autoincrement()) @db.UnsignedBigInt
+    name     String @db.VarChar(50)
+    username String @db.VarChar(30)
+    email    String @unique @db.VarChar(100)
+    password String
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+
+    author  Author? // A user can hold only one author profile!
+    Profile Profile? // A user can hold only one general profile!
+
+    @@map("users")
+}
+
+enum Gender {
+    Male   @map("male")
+    Female @map("female")
+}
+
+// Each user can have only one general profile
+model Profile {
+    id     BigInt  @id @default(autoincrement()) @db.UnsignedBigInt
+    bio    String? @db.MediumText
+    url    String?
+    avatar String?
+    gender Gender?
+
+    // Each user can have only one profile
+    userId BigInt @unique @map("user_id") @db.UnsignedBigInt
+    user   User   @relation(fields: [userId], references: [id])
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+
+    @@map("profiles")
+}
+
+// An author profile will be created when user wants to upload novels.
+// This also applies for site administrators
+model Author {
+    id      BigInt  @id @default(autoincrement()) @db.UnsignedBigInt
+    name    String
+    altName String? @map("alt_name")
+    bio     String? @db.MediumText
+
+    // Each user can have only one author profile
+    userId BigInt @unique @map("user_id") @db.UnsignedBigInt
+    user   User   @relation(fields: [userId], references: [id])
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+    Novel     Novel[]
+
+    @@map("authors")
+}
+
+enum NovelStatus {
+    Published @map("published")
+    Draft     @map("draft")
+}
+
+model Novel {
+    id       BigInt      @id @default(autoincrement()) @db.UnsignedBigInt
+    uid      String      @default(cuid())
+    title    String
+    altTitle String?     @map("alt_title")
+    slug     String      @unique
+    summary  String?     @db.MediumText
+    status   NovelStatus @default(Draft)
+
+    // A novel will have one author
+    authorId BigInt @map("author_id") @db.UnsignedBigInt
+    author   Author @relation(fields: [authorId], references: [id])
+
+    Series Series[] // A novel has many series which would have many chapters
+
+    createdAt DateTime  @default(now()) @map("created_at")
+    updatedAt DateTime  @updatedAt @map("updated_at")
+    deletedAt DateTime? @map("deleted_at")
+
+    @@map("novels")
+}
+
+// A novel will have many series (seasons) and each series will contain
+// individual chapters
+model Series {
+    id          BigInt  @id @default(autoincrement()) @db.UnsignedBigInt
+    uid         String  @default(cuid())
+    name        String
+    description String? @db.MediumText
+
+    // A series will belong to a novel
+    novelId BigInt @map("novel_id") @db.UnsignedBigInt
+    novel   Novel  @relation(fields: [novelId], references: [id])
+
+    Chapter Chapter[] // A series will have many chapters
+
+    createdAt DateTime  @default(now()) @map("created_at")
+    updatedAt DateTime  @updatedAt @map("updated_at")
+    deletedAt DateTime? @map("deleted_at")
+
+    @@map("series")
+}
+
+// A chapter will belong to a Series
+model Chapter {
+    id     BigInt @id @default(autoincrement()) @db.UnsignedBigInt
+    uid    String @default(cuid())
+    name   String
+    number Int    @db.UnsignedMediumInt // Chapter number per series
+    notes  String @db.MediumText // Author notes
+
+    // A chapter will be associated with a series (season) and a series
+    // will be associated with a novel
+    seriesId BigInt @map("series_id") @db.UnsignedBigInt
+    series   Series @relation(fields: [seriesId], references: [id])
+
+    // Each chapter can have contents in translated in multiple languages
+    ChapterContent ChapterContent[]
+
+    createdAt DateTime  @default(now()) @map("created_at")
+    updatedAt DateTime  @updatedAt @map("updated_at")
+    deletedAt DateTime? @map("deleted_at")
+
+    @@map("chapters")
+}
+
+model ChapterContent {
+    id       BigInt  @id @default(autoincrement()) @db.UnsignedBigInt
+    uid      String  @default(cuid())
+    contents String  @db.Text
+    language String  @db.VarChar(2) // Language code
+    audio    String? // Location to audio file
+
+    // Chapter contents will be associated with a chapter
+    chapterId BigInt  @map("chapter_id") @db.UnsignedBigInt
+    chapter   Chapter @relation(fields: [chapterId], references: [id])
+
+    createdAt DateTime  @default(now()) @map("created_at")
+    updatedAt DateTime  @updatedAt @map("updated_at")
+    deletedAt DateTime? @map("deleted_at")
+
+    @@map("chapter_contents")
+}

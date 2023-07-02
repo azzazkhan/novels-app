@@ -7,7 +7,10 @@
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
-        "format": "prettier --write \"**/*.{ts,tsx,cts,js,jsx,cjs,json,css,scss,sass}\""
+        "format": "prettier --write \"**/*.{ts,tsx,cts,js,jsx,cjs,json,css,scss,sass}\"",
+        "prebuild-app": "rimraf dist",
+        "build-app": "tsc --project tsconfig.node.json",
+        "app": "TS_NODE_BASEURL=./dist node -r tsconfig-paths/register dist/application.js"
     },
     "dependencies": {
         "@emotion/react": "^11.11.0",
@@ -19,8 +22,11 @@
         "@headlessui/react": "^1.7.15",
         "@mantine/core": "^6.0.13",
         "@mantine/hooks": "^6.0.13",
+        "@prisma/client": "4.16.2",
         "@reduxjs/toolkit": "^1.9.5",
+        "argon2": "^0.30.3",
         "classnames": "^2.3.2",
+        "commander": "^11.0.0",
         "daisyui": "^3.0.20",
         "moment": "^2.29.4",
         "next": "13.4.4",
@@ -32,6 +38,7 @@
         "swiper": "^9.3.2"
     },
     "devDependencies": {
+        "@faker-js/faker": "^8.0.2",
         "@tailwindcss/typography": "^0.5.9",
         "@types/node": "20.2.5",
         "@types/react": "18.2.8",
@@ -53,8 +60,11 @@
         "eslint-plugin-react-hooks": "^4.6.0",
         "postcss": "^8.4.24",
         "prettier": "^2.8.8",
+        "prisma": "^4.16.2",
+        "rimraf": "^5.0.1",
         "sass": "^1.62.1",
         "tailwindcss": "^3.3.2",
+        "tsconfig-paths": "^4.2.0",
         "typescript": "5.1.3"
     }
 }
