@@ -1,5 +1,3 @@
-import { PrismaClient } from '@prisma/client';
-
 declare global {
     namespace NodeJS {
         interface ProcessEnv {
@@ -11,13 +9,19 @@ declare global {
     }
 
     type ClassName = string | undefined | null | string[] | Record<string, unknown>;
-    type DefinitionModel<M = object> = Omit<M, 'id' | 'createdAt' | 'updatedAt'>;
-    type Definition<M = object> = (
-        attrs?: Partial<M>
-    ) => Promise<DefinitionModel<M>> | DefinitionModel<M>;
+    type ModelDefinition<M = object> = Omit<M, 'id' | 'createdAt' | 'updatedAt'>;
+    type DefinitionArgs<M = object> = Partial<ModelDefinition<M>>;
+
+    interface IFactory<M = object> {
+        definition(attrs: Partial<M>): ModelDefinition<M>;
+        make(attrs: Partial<M>): Promise<ModelDefinition<M> | ModelDefinition<M>[] | undefined>;
+        create(attrs: Partial<M>): Promise<void>;
+    }
+
     interface Seeder {
-        (prisma: PrismaClient): Promise<void>;
         name: string;
+
+        run(): Promise<void>;
     }
 }
 

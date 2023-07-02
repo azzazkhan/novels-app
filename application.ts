@@ -1,8 +1,21 @@
 import { Command } from 'commander';
-import { main } from './scripts/database';
+import runSeeder from './scripts/seeder';
 
 const program = new Command();
 
-console.log('Hello world!');
+program
+    .name('Novels CLI')
+    .description('Tool for managing application through local and automated environments')
+    .version('1.0.1');
 
-program.version('0.1.0').command('migrate').action(main);
+async function main() {
+    program
+        .command('seed')
+        .description('Run all registered database seeders')
+        .option('--fresh', 'Remove all data before seeding')
+        .action((options) => runSeeder(!!options.fresh));
+
+    await program.parseAsync(process.argv);
+}
+
+main();
