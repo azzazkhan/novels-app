@@ -9,20 +9,6 @@ declare global {
     }
 
     type ClassName = string | undefined | null | string[] | Record<string, unknown>;
-    type ModelDefinition<M = object> = Omit<M, 'id' | 'createdAt' | 'updatedAt'>;
-    type DefinitionArgs<M = object> = Partial<ModelDefinition<M>>;
-
-    interface IFactory<M = object> {
-        definition(attrs: Partial<M>): ModelDefinition<M>;
-        make(attrs: Partial<M>): Promise<ModelDefinition<M> | ModelDefinition<M>[] | undefined>;
-        create(attrs: Partial<M>): Promise<void>;
-    }
-
-    interface Seeder {
-        name: string;
-
-        run(): Promise<void>;
-    }
 }
 
 export {};

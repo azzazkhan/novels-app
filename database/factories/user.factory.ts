@@ -1,16 +1,20 @@
 import { User } from '@prisma/client';
 import { faker } from '@faker-js/faker';
-import { Factory } from './factory';
+import type { DefinitionArgs, ModelDefinition } from 'types/database';
 import { hash } from 'lib/utils';
 import { prisma } from 'lib/prisma';
+import { Factory } from './factory';
 
-export class UserFactory extends Factory {
+export class UserFactory extends Factory<User> {
     async definition(attrs?: DefinitionArgs<User>): Promise<ModelDefinition<User>> {
+        const password = attrs?.password || '$Lorem123';
+        attrs && delete attrs.password;
+
         return {
             name: faker.person.fullName(),
             username: faker.internet.userName(),
             email: faker.internet.email(),
-            password: await hash('$Lorem123'),
+            password: await hash(password),
             ...attrs,
         };
     }
@@ -18,11 +22,11 @@ export class UserFactory extends Factory {
     async create(attrs?: DefinitionArgs<User>) {
         const data = await this.make(attrs);
 
-        Array.isArray(data)
+        await (Array.isArray(data)
             ? prisma.user.createMany({
                   data: data as ModelDefinition<User>[],
                   skipDuplicates: true,
               })
-            : prisma.user.create({ data: data as ModelDefinition<User> });
+            : prisma.user.create({ data: data as ModelDefinition<User> }));
     }
 }

@@ -1,22 +1,28 @@
-import { spawnSync } from 'child_process';
-import { prisma } from 'lib/prisma';
-import chalk from 'chalk';
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-restricted-syntax */
+import { Seeder } from './seeders/seeder';
+import seeders from './seeders';
+import { refreshDatabase } from './utils';
 
-export default async function main(refresh = false) {
-    console.log('\nInitializing database seeder script...');
-
-    try {
-        // Refresh the database if required
-        if (refresh) {
-            console.log(chalk.yellow('Dropping all tables since [--fresh] flag was set!'));
-            spawnSync('prisma', ['migrate', 'reset']);
-            console.log('Database re-migrated successfully!');
-        }
-
-        const users = await prisma.user.findMany();
-
-        console.log(users);
-    } catch (err) {
-        prisma.$disconnect();
-    }
+interface Props {
+    refresh?: boolean;
 }
+
+declare type Fn = (props: Props) => Promise<void>;
+
+const runSeeders: Fn = async ({ refresh }) => {
+    console.log('\nInitializing database seeder script...');
+    if (refresh) refreshDatabase(); // Refresh database if required
+
+    for (const seeder of seeders as unknown as Array<typeof Seeder & { name: string }>) {
+        console.log(`\nPreparing to run seeder [${seeder.name}]...`);
+        const start = performance.now();
+        await seeder.exec();
+        const end = performance.now();
+
+        const duration = ((end - start) / 1000).toFixed(3);
+        console.log(`Finished running [${seeder.name}] in ${duration} sec`);
+    }
+};
+
+export default runSeeders;
