@@ -1,0 +1,10 @@
+import type { DefinitionArgs } from 'types/database';
+import { Seeder } from './seeder';
+
+type Model = object;
+
+export class ObjectSeeder extends Seeder {
+    async run() {
+        await ObjectFactory.exec<DefinitionArgs<Model>>(10);
+    }
+}

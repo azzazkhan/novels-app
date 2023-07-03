@@ -15,7 +15,7 @@ const runSeeders: Fn = async ({ refresh }) => {
     if (refresh) refreshDatabase(); // Refresh database if required
 
     for (const seeder of seeders as unknown as Array<typeof Seeder & { name: string }>) {
-        console.log(`\nPreparing to run seeder [${seeder.name}]...`);
+        console.log(`\nPreparing to run seeder [${seeder.name}] ...`);
         const start = performance.now();
         await seeder.exec();
         const end = performance.now();

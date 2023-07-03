@@ -10,7 +10,8 @@
         "format": "prettier --write \"**/*.{ts,tsx,cts,js,jsx,cjs,json,css,scss,sass}\"",
         "prebuild-app": "rimraf dist",
         "build-app": "tsc --project tsconfig.node.json",
-        "app": "TS_NODE_BASEURL=./dist node -r tsconfig-paths/register dist/application.js"
+        "app": "TS_NODE_BASEURL=./dist node -r tsconfig-paths/register dist/application.js",
+        "run-app": "npm run build-app && npm run app --"
     },
     "dependencies": {
         "@emotion/react": "^11.11.0",

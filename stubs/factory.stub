@@ -1,0 +1,23 @@
+import { faker } from '@faker-js/faker';
+import type { DefinitionArgs, ModelDefinition } from 'types/database';
+import { prisma } from 'lib/prisma';
+import { Factory } from './factory';
+
+type Model = object;
+
+export class ObjectFactory extends Factory<Model> {
+    async definition(attrs?: DefinitionArgs<Model>): Promise<ModelDefinition<Model>> {
+        return { ...attrs };
+    }
+
+    async create(attrs?: DefinitionArgs<Model>) {
+        const data = await this.make(attrs);
+
+        await (Array.isArray(data)
+            ? prisma.Symbol.createMany({
+                  data: data as ModelDefinition<Model>[],
+                  skipDuplicates: true,
+              })
+            : prisma.Symbol.create({ data: data as ModelDefinition<Model> }));
+    }
+}
