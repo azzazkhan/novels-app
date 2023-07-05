@@ -21,7 +21,7 @@ model User {
     updatedAt DateTime @updatedAt @map("updated_at")
 
     author  Author? // A user can hold only one author profile!
-    Profile Profile? // A user can hold only one general profile!
+    profile Profile? // A user can hold only one general profile!
 
     @@map("users")
 }
