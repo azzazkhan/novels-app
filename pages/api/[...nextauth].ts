@@ -4,7 +4,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import { getClientIp } from 'request-ip';
 import { LoginResponse, SessionData } from 'types/auth';
 
-async function auth(req: NextApiRequest, res: NextApiResponse) {
+export default async function auth(req: NextApiRequest, res: NextApiResponse) {
     return NextAuth(req, res, {
         providers: [
             CredentialsProvider({
@@ -14,7 +14,7 @@ async function auth(req: NextApiRequest, res: NextApiResponse) {
                     password: {},
                 },
                 async authorize(credentials, req) {
-                    const res = await fetch(`${process.env.BACKEND_API_URL}/login`, {
+                    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/login`, {
                         method: 'POST',
                         body: JSON.stringify({
                             username: credentials?.username,
@@ -70,5 +70,3 @@ async function auth(req: NextApiRequest, res: NextApiResponse) {
         },
     });
 }
-
-export { auth as GET, auth as POST };
