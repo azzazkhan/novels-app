@@ -1,12 +1,10 @@
 import type { FC } from 'react';
-import MantineProvider from 'providers/MantineProvider';
 import classNames from 'classnames';
-import { ReduxProvider } from 'providers';
+import { ReduxProvider, SessionProvider, MantineProvider } from 'providers';
 import { Header } from 'components/layout';
 import { nunito, merienda } from './fonts';
 import 'styles/tailwind.css';
 import 'styles/app.scss';
-import SessionProvider from 'providers/SessionProvider';
 
 interface Props {
     children: React.ReactNode;

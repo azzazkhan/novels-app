@@ -44,9 +44,14 @@ module.exports = {
                     '0%, 100%': { transform: 'scale(1)' },
                     '50%': { transform: 'scale(0.85)' },
                 },
+                shine: {
+                    '0%': { backgroundPosition: 'var(--skeleton-start)' },
+                    '60%, 100%': { backgroundPosition: 'var(--skeleton-end)' },
+                },
             },
             animation: {
                 pop: 'pop 300ms ease',
+                shine: 'shine 2s infinite linear',
             },
         },
     },

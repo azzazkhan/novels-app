@@ -5,13 +5,13 @@ import classNames from 'classnames';
 import background from 'assets/images/illustrations/artist-drawing-manga.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import CollectionsSlider from './CollectionsSlider';
+import CollectionsSlider from './AwardWinningSlider';
 
 interface Props {
     className?: ClassName;
 }
 
-const Collections: FC<Props> = ({ className }) => {
+const AwardWinning: FC<Props> = ({ className }) => {
     return (
         <Container
             wrapperClassName="max-sm:max-w-full"
@@ -56,4 +56,4 @@ const Collections: FC<Props> = ({ className }) => {
     );
 };
 
-export default Collections;
+export default AwardWinning;

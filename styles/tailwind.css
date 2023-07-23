@@ -12,6 +12,15 @@
 }
 
 @layer utilities {
+    .skeleton {
+        --skeleton-start: -100px;
+        --skeleton-end: 180px;
+
+        background-image: linear-gradient(90deg, #e5e7eb 0px, #f9fafb 60px, #e5e7eb 120px);
+        background-size: 600px;
+        @apply animate-shine;
+    }
+
     .text-shadow {
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
     }
@@ -19,7 +28,7 @@
 
 @layer components {
     .rank-title {
-        @apply text-white bg-no-repeat pt-3 pr-8 pl-3 font-bold mb-6 inline-block text-xl whitespace-nowrap;
+        @apply inline-block pt-3 pl-3 pr-8 mb-6 text-xl font-bold text-white bg-no-repeat whitespace-nowrap;
         background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg width="215" height="44" fill="none" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M20 9h195l-12.037 35H20V9z" fill="%23FFBC69"/%3E%3Cpath d="M0 0h204l-12 36H0V0z" fill="url(%23paint0_linear)"/%3E%3Cpath d="M108.81 0H204l-12.108 36H90l18.81-36z" fill="url(%23paint1_linear)"/%3E%3Cdefs%3E%3ClinearGradient id="paint0_linear" y1="15.3" x2="204" y2="15.3" gradientUnits="userSpaceOnUse"%3E%3Cstop stop-color="%233B66F5"/%3E%3Cstop offset="1" stop-color="%23163BCD"/%3E%3C/linearGradient%3E%3ClinearGradient id="paint1_linear" x1="199.969" y1="23" x2="75.027" y2="24.805" gradientUnits="userSpaceOnUse"%3E%3Cstop stop-color="%233B66F5"/%3E%3Cstop offset="1" stop-color="%233B66F5" stop-opacity=".69"/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E');
         background-size: 100% 40px;
         background-position-y: 0.5rem;

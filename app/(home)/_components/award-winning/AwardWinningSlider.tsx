@@ -15,12 +15,12 @@ interface Props
     className?: ClassName;
 }
 
-const CollectionsSlider: FC<Props> = ({ className, ...props }) => {
+const AwardWinningSlider: FC<Props> = ({ className, ...props }) => {
     return (
-        <div className={classNames('', className)} {...props}>
+        <div className={classNames(className)} {...props}>
             <Swiper
                 slidesPerView={1}
-                className="h-192 sm:h-96"
+                className="overflow-hidden h-192 sm:h-96"
                 pagination={{
                     clickable: true,
                     bulletClass: 'swiper-pagination-bullet bg-black !rounded-full opacity-40',
@@ -128,4 +128,4 @@ const CollectionsSlider: FC<Props> = ({ className, ...props }) => {
     );
 };
 
-export default CollectionsSlider;
+export default AwardWinningSlider;
