@@ -20,6 +20,7 @@ export interface Profile extends Model {
 }
 
 export interface Author extends Model, HasUuid {
+    slug: string;
     name: string;
     alt_name: Nullable<string>;
     avatar: Nullable<string>;

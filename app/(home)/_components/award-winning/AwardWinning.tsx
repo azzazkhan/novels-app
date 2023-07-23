@@ -1,11 +1,12 @@
-import type { FC } from 'react';
+import { FC, Suspense } from 'react';
 import Image from 'next/image';
 import { Container } from 'components/common';
 import classNames from 'classnames';
 import background from 'assets/images/illustrations/artist-drawing-manga.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import CollectionsSlider from './AwardWinningSlider';
+import AwardWinningSliderWrapper from './AwardWinningSliderWrapper';
+import Loading from './Loading';
 
 interface Props {
     className?: ClassName;
@@ -20,7 +21,6 @@ const AwardWinning: FC<Props> = ({ className }) => {
                 className
             )}
         >
-            {/* h-96 */}
             <div className="relative overflow-hidden h-72 xl:h-96 md:h-80 md:mt-4 xl:mt-0 rounded-2xl bg-black/80 lg:col-span-2 xl:col-span-1 max-sm:max-w-[95%] max-sm:mx-4">
                 <Image
                     src={background}
@@ -51,7 +51,11 @@ const AwardWinning: FC<Props> = ({ className }) => {
                 </div>
             </div>
 
-            <CollectionsSlider className="lg:col-span-3 xl:col-span-1" />
+            <div className="lg:col-span-3 xl:col-span-1">
+                <Suspense fallback={<Loading />}>
+                    <AwardWinningSliderWrapper />
+                </Suspense>
+            </div>
         </Container>
     );
 };

@@ -3,19 +3,24 @@
 import { FC, DetailedHTMLProps, HTMLAttributes } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import classNames from 'classnames';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import classNames from 'classnames';
-import novels from 'data/novels';
+import { AwardedNovels } from './queries';
+import { prefixAssetPath } from 'utils';
 
 interface Props
     extends Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'className'> {
     className?: ClassName;
+    novels: AwardedNovels[];
 }
 
-const AwardWinningSlider: FC<Props> = ({ className, ...props }) => {
+const AwardWinningSlider: FC<Props> = ({ novels, className, ...props }) => {
+    const itemsPerSlide = 4;
+    const slideCount = Math.ceil(novels.length / itemsPerSlide);
+
     return (
         <div className={classNames(className)} {...props}>
             <Swiper
@@ -31,16 +36,18 @@ const AwardWinningSlider: FC<Props> = ({ className, ...props }) => {
                 speed={700}
                 spaceBetween={20}
             >
-                {Array.from({ length: 3 }).map((_, idx) => {
+                {Array.from({ length: slideCount }).map((_, idx) => {
+                    const startIdx = idx * itemsPerSlide;
+                    const selectedNovels = novels.slice(startIdx, startIdx + itemsPerSlide);
+
                     return (
                         <SwiperSlide
                             key={idx}
                             className="!h-176 sm:!h-88 max-sm:px-[calc(2.5%+1rem)]"
                         >
                             <div className="grid w-full h-full grid-cols-1 gap-6 sm:grid-cols-2">
-                                {novels.slice(0, 4).map((novel, idx) => {
-                                    const { title, slug, image, categories } = novel;
-                                    const categorySlugs = Object.keys(categories).slice(0, 5);
+                                {selectedNovels.map((novel, idx) => {
+                                    const { title, slug, thumbnail, author, categories } = novel;
 
                                     return (
                                         <article
@@ -53,9 +60,10 @@ const AwardWinningSlider: FC<Props> = ({ className, ...props }) => {
                                                 className="flex-shrink-0 block w-24 h-36"
                                             >
                                                 <Image
-                                                    src={image}
+                                                    src={prefixAssetPath(thumbnail)}
                                                     loading="lazy"
-                                                    placeholder="blur"
+                                                    height={144}
+                                                    width={96}
                                                     className="object-cover object-center w-24 rounded-lg h-36"
                                                     alt={title}
                                                 />
@@ -76,7 +84,7 @@ const AwardWinningSlider: FC<Props> = ({ className, ...props }) => {
                                                         return (
                                                             <FontAwesomeIcon
                                                                 icon={faStar}
-                                                                className="text-sm text-amber-500"
+                                                                className="w-4 h-4 text-sm text-amber-500"
                                                                 key={idx}
                                                             />
                                                         );
@@ -85,40 +93,51 @@ const AwardWinningSlider: FC<Props> = ({ className, ...props }) => {
                                                 <span className="text-xs text-gray-700">
                                                     Written by{' '}
                                                     <Link
-                                                        href="/authors/turtle-me"
+                                                        href={`/authors/${author.slug}`}
                                                         className="font-bold hover:underline"
                                                         title="View author Turtle Me's profile"
                                                     >
-                                                        TurtleMe (漫客文化)
+                                                        {author.name}
+                                                        {author.alt_name && (
+                                                            <span> ({author.alt_name})</span>
+                                                        )}
                                                     </Link>
                                                 </span>
 
                                                 {categories && (
                                                     <div className="flex flex-wrap mt-2 text-xs">
-                                                        {categorySlugs.map((slug, idx) => {
-                                                            const name = categories[slug];
-
-                                                            return (
-                                                                <span key={idx}>
-                                                                    <Link
-                                                                        href={`/categories/${slug}`}
-                                                                        title={`View more novels in ${name} category`}
-                                                                        className="font-medium hover:underline"
-                                                                    >
-                                                                        {name}
-                                                                    </Link>
-                                                                    {idx <
-                                                                        categorySlugs.length -
-                                                                            1 && <>,&nbsp;</>}
-                                                                </span>
-                                                            );
-                                                        })}
+                                                        {categories
+                                                            .slice(0, 4)
+                                                            .map(({ name, slug }, idx) => {
+                                                                return (
+                                                                    <span key={idx}>
+                                                                        <Link
+                                                                            href={`/categories/${slug}`}
+                                                                            title={`View more novels in ${name} category`}
+                                                                            className="font-medium hover:underline"
+                                                                        >
+                                                                            {name}
+                                                                        </Link>
+                                                                        {idx <
+                                                                            categories.length -
+                                                                                1 && <>,&nbsp;</>}
+                                                                    </span>
+                                                                );
+                                                            })}
                                                     </div>
                                                 )}
                                             </div>
                                         </article>
                                     );
                                 })}
+
+                                {/* Create empty columns to prevent col span leakage */}
+                                {selectedNovels.length < itemsPerSlide &&
+                                    Array.from({
+                                        length: itemsPerSlide - selectedNovels.length,
+                                    }).map((_, idx) => {
+                                        return <div className="w-24 h-36" key={idx} />;
+                                    })}
                             </div>
                         </SwiperSlide>
                     );

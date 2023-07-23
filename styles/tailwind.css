@@ -18,7 +18,8 @@
 
         background-image: linear-gradient(90deg, #e5e7eb 0px, #f9fafb 60px, #e5e7eb 120px);
         background-size: 600px;
-        @apply animate-shine;
+
+        @apply max-w-full animate-shine;
     }
 
     .text-shadow {
