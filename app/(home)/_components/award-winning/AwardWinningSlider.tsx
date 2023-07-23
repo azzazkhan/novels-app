@@ -99,7 +99,12 @@ const AwardWinningSlider: FC<Props> = ({ novels, className, ...props }) => {
                                                     >
                                                         {author.name}
                                                         {author.alt_name && (
-                                                            <span> ({author.alt_name})</span>
+                                                            <>
+                                                                {' '}
+                                                                <span className="whitespace-nowrap">
+                                                                    ({author.alt_name})
+                                                                </span>
+                                                            </>
                                                         )}
                                                     </Link>
                                                 </span>

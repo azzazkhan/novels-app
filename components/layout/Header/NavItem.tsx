@@ -20,7 +20,7 @@ const NavItem: FC<Props> = ({ href = '#', icon, className, children, ...props })
     const pathname = usePathname();
     const path = typeof href === 'string' ? href : href.href || '';
 
-    const active = isValidPath(path) ? pathname.startsWith(path) : false;
+    const active = isValidPath(path) ? pathname?.startsWith(path) : false;
 
     const handleNavigation: MouseEventHandler<HTMLAnchorElement> = useCallback(
         (event) => {
@@ -46,7 +46,7 @@ const NavItem: FC<Props> = ({ href = '#', icon, className, children, ...props })
                     className
                 )}
             >
-                {icon && <FontAwesomeIcon className="h-4 inline-block mr-2" icon={icon} />}
+                {icon && <FontAwesomeIcon className="inline-block h-4 mr-2" icon={icon} />}
                 {children}
             </Link>
         </li>

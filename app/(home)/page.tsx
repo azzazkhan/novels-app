@@ -18,4 +18,7 @@ const Home: FC = () => {
     );
 };
 
+// Cache the page for 1 minute
+export const revalidate = 60;
+
 export default Home;
