@@ -22,7 +22,7 @@ declare global {
         string | string[] | number | number[] | null | boolean | undefined
     >;
     type ServerComponent<P = object, E extends Params = object> = (
-        props: P & E
+        props: P & { params: E }
     ) => Promise<ReactNode> | ReactNode;
 }
 
