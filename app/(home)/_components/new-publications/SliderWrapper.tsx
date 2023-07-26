@@ -2,7 +2,7 @@ import { Container } from 'components/common';
 import { getNovels } from './queries';
 import Slider from './Slider';
 
-const SliderWrapper: ServerComponent = async () => {
+const SliderWrapper = async () => {
     const novels = await getNovels();
 
     return (

@@ -1,7 +1,7 @@
 import AwardWinningSlider from './AwardWinningSlider';
 import { getNovels } from './queries';
 
-const AwardWinningSliderWrapper: ServerComponent = async () => {
+const AwardWinningSliderWrapper = async () => {
     const novels = await getNovels();
 
     return <AwardWinningSlider novels={novels} />;

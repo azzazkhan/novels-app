@@ -8,21 +8,24 @@ import { faEye, faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 
 interface Props
-    extends Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, 'className'> {
+    extends Omit<
+        DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
+        'className' | 'ref'
+    > {
     className?: ClassName;
 }
 
 const Rankings: FC<Props> = (props) => {
     return (
         <Container {...props}>
-            <h2 className="mb-4 text-2xl md:text-3xl font-bold">Rankings</h2>
+            <h2 className="mb-4 text-2xl font-bold md:text-3xl">Rankings</h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
                 {['Most Viewed', 'Most Liked', 'User Rated'].map((title, stackIdx) => {
                     return (
                         <div key={stackIdx}>
                             <h3 className="rank-title">{title}</h3>
-                            <div className="flex flex-col space-y-6 md:space-y-4 mx-4">
+                            <div className="flex flex-col mx-4 space-y-6 md:space-y-4">
                                 {novels.slice(0, 5).map((novel, idx) => {
                                     const { title, image, slug } = novel;
                                     const color = {
@@ -34,7 +37,7 @@ const Rankings: FC<Props> = (props) => {
 
                                     return (
                                         <div
-                                            className="flex justify-between items-stretch"
+                                            className="flex items-stretch justify-between"
                                             key={idx}
                                         >
                                             <Link
@@ -44,7 +47,7 @@ const Rankings: FC<Props> = (props) => {
                                             >
                                                 <Image
                                                     src={image}
-                                                    className="h-22 w-16 rounded-lg object-cover"
+                                                    className="object-cover w-16 rounded-lg h-22"
                                                     alt={title}
                                                 />
                                             </Link>
@@ -60,7 +63,7 @@ const Rankings: FC<Props> = (props) => {
                                                 <Link
                                                     href={`/novels/${slug}`}
                                                     title={`Read ${title}`}
-                                                    className="text-lg font-bold w-full whitespace-nowrap truncate hover:underline block"
+                                                    className="block w-full text-lg font-bold truncate whitespace-nowrap hover:underline"
                                                 >
                                                     {title}
                                                 </Link>
@@ -107,7 +110,7 @@ const Rankings: FC<Props> = (props) => {
                                                                 );
                                                             })}
                                                         </div>
-                                                        <p className="text-gray-700 text-sm mt-2">
+                                                        <p className="mt-2 text-sm text-gray-700">
                                                             48K Reviews
                                                         </p>
                                                     </Fragment>

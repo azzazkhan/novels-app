@@ -15,7 +15,7 @@ const Container: ForwardRefRenderFunction<HTMLDivElement, Props> = (
     return (
         <div
             className={classNames(
-                'mx-auto max-w-[95%] 2xl:max-w-[min(95%,1536px)]',
+                'mx-auto max-w-[95%] 2xl:max-w-[min(95%,1280px)]',
                 wrapperClassName
             )}
             {...props}

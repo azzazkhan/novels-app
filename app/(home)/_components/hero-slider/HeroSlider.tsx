@@ -17,7 +17,7 @@ import slides from './slides';
 interface Props
     extends Omit<
         DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
-        'className' | 'children'
+        'className' | 'children' | 'ref'
     > {
     className?: ClassName;
 }

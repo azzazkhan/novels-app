@@ -5,6 +5,7 @@ import { Header } from 'components/layout';
 import { nunito, merienda } from './fonts';
 import 'styles/tailwind.css';
 import 'styles/app.scss';
+import Screen from './Screen';
 
 interface Props {
     children: React.ReactNode;
@@ -23,6 +24,7 @@ const RootLayout: FC<Props> = ({ children }) => {
                 <ReduxProvider>
                     <SessionProvider>
                         <MantineProvider>
+                            <Screen />
                             <Header />
                             <main className="pt-16">{children}</main>
                         </MantineProvider>
