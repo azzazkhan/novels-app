@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -44,8 +43,8 @@ const NovelDetails: ServerComponent<object, Params> = async ({ params: { slug } 
 
     return (
         <Page>
-            <Container className="grid lg:grid-cols-12">
-                <div className="lg:col-span-3">
+            <Container className="grid md:grid-cols-12 lg:grid-cols-12">
+                <div className="md:col-span-4 lg:col-span-3">
                     <Thumbnail image={novel.thumbnail} title={novel.title} type="novel" rank={1} />
 
                     {/* <div className="flex flex-col mt-6 space-y-2">
@@ -70,28 +69,39 @@ const NovelDetails: ServerComponent<object, Params> = async ({ params: { slug } 
                         </div>
                     </div> */}
                 </div>
-                <div className="flex flex-col justify-between lg:pl-20 lg:col-span-9">
+                <div className="flex flex-col justify-between mt-10 md:mt-0 md:pl-10 lg:pl-10 xl:pl-20 md:col-span-8 lg:col-span-9">
                     <div>
-                        <h1 className="text-4xl font-bold">{novel.title}</h1>
+                        <h1 className="text-2xl font-bold lg:text-3xl xl:text-4xl">
+                            <span>{novel.title}</span>
+                            <span className="hidden sm:inline-block xl:hidden">&nbsp;</span>
+                            <span className="hidden font-normal text-gray-700 sm:inline-block xl:hidden sm:text-base md:text-lg whitespace-nowrap">
+                                ({novel.alt_title})
+                            </span>
+                        </h1>
                         {novel.alt_title && (
-                            <h2 className="mt-1 text-xl text-gray-700">({novel.alt_title})</h2>
+                            <h2 className="hidden mt-1 text-gray-700 sm:text-lg xl:text-xl xl:block">
+                                ({novel.alt_title})
+                            </h2>
                         )}
 
                         {/* Categories */}
-                        <div className="flex items-center mt-2 mb-4 space-x-2 text-sm text-gray-500 select-none">
+                        <div className="flex flex-wrap items-center mt-4 mb-2 text-sm text-gray-500 select-none lg:mt-2">
                             {novel.categories.map(({ id, name, slug }, idx) => {
                                 return (
-                                    <Fragment key={id}>
+                                    <div
+                                        className="flex items-center mb-2 mr-2 space-x-2 whitespace-nowrap"
+                                        key={id}
+                                    >
                                         <Link
                                             href={`/categories/${slug}`}
-                                            className="cursor-pointer hover:underline"
+                                            className="cursor-pointer whitespace-nowrap hover:underline"
                                         >
                                             {name}
                                         </Link>
                                         {idx < novel.categories.length - 1 && (
                                             <span className="block w-0.5 h-0.5 bg-gray-500 rounded-full " />
                                         )}
-                                    </Fragment>
+                                    </div>
                                 );
                             })}
                         </div>
@@ -183,23 +193,23 @@ const NovelDetails: ServerComponent<object, Params> = async ({ params: { slug } 
                     </div>
 
                     {/* Actions */}
-                    <div className="flex items-center mt-10 space-x-2">
+                    <div className="flex flex-wrap items-center mt-10">
                         <button
                             type="button"
-                            className="inline-flex items-center h-12 px-6 font-bold text-white transition-colors bg-blue-500 rounded-full hover:bg-blue-600"
+                            className="inline-flex items-center h-12 px-6 mb-2 mr-2 font-bold text-white transition-colors bg-blue-500 rounded-full hover:bg-blue-600 whitespace-nowrap"
                         >
                             Start Reading
                         </button>
                         <button
                             type="button"
-                            className="inline-flex items-center h-12 px-6 space-x-2 font-bold text-gray-500 transition-colors rounded-full hover:bg-gray-200 hover:text-black"
+                            className="inline-flex items-center h-12 px-6 mb-2 mr-2 space-x-2 font-bold text-gray-500 transition-colors rounded-full hover:bg-gray-200 hover:text-black whitespace-nowrap"
                         >
                             <FontAwesomeIcon icon={faPlus} />
                             <span>Add to Library</span>
                         </button>
                         <button
                             type="button"
-                            className="inline-flex items-center h-12 px-6 space-x-2 font-bold text-red-500 transition-colors rounded-full hover:bg-red-100"
+                            className="inline-flex items-center h-12 px-6 mb-2 mr-2 space-x-2 font-bold text-red-500 transition-colors rounded-full hover:bg-red-100 whitespace-nowrap"
                         >
                             <FontAwesomeIcon icon={faHeart} />
                             <span>Like</span>

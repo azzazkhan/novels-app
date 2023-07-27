@@ -22,7 +22,7 @@ const Thumbnail: FC<Props> = ({ image, title, type, rank, className }) => {
     return (
         <div
             className={classNames(
-                'w-full h-64 lg:h-auto lg:aspect-[10/13] shadow rounded-2xl overflow-hidden relative',
+                'w-full h-64 md:h-auto md:aspect-[10/13] shadow rounded-2xl overflow-hidden relative',
                 className
             )}
         >
