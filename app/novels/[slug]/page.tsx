@@ -14,7 +14,7 @@ import {
 import { Container, Page } from 'components/common';
 import { Thumbnail } from './_components';
 import { getNovel } from './queries';
-// import badges from './awards';
+import badges from './awards';
 
 import badge6 from 'assets/icons/badge-6.png';
 import badge3 from 'assets/icons/badge-3.png';
@@ -43,33 +43,14 @@ const NovelDetails: ServerComponent<object, Params> = async ({ params: { slug } 
 
     return (
         <Page>
-            <Container className="grid md:grid-cols-12 lg:grid-cols-12">
+            <Container className="grid md:grid-cols-12 lg:grid-cols-12 gap-y-10 md:gap-y-6">
+                {/* Novel thumbnail */}
                 <div className="md:col-span-4 lg:col-span-3">
                     <Thumbnail image={novel.thumbnail} title={novel.title} type="novel" rank={1} />
-
-                    {/* <div className="flex flex-col mt-6 space-y-2">
-                        <h4 className="text-2xl font-bold">Awards & Power-ups</h4>
-                        <div className="grid grid-cols-5 gap-x-2 gap-y-4">
-                            {badges.map(({ icon, title }, idx) => {
-                                return (
-                                    <button
-                                        type="button"
-                                        className="flex items-center justify-center transition-colors duration-300 rounded-lg aspect-square hover:bg-gray-100"
-                                        key={idx}
-                                        title={title}
-                                    >
-                                        <Image
-                                            src={icon}
-                                            className="object-contain w-3/4 aspect-square"
-                                            alt={title}
-                                        />
-                                    </button>
-                                );
-                            })}
-                        </div>
-                    </div> */}
                 </div>
-                <div className="flex flex-col justify-between mt-10 md:mt-0 md:pl-10 lg:pl-10 xl:pl-20 md:col-span-8 lg:col-span-9">
+
+                {/* Novel details */}
+                <div className="flex flex-col justify-between md:pl-10 xl:pl-20 md:col-span-8 lg:col-span-9">
                     <div>
                         <h1 className="text-2xl font-bold lg:text-3xl xl:text-4xl">
                             <span>{novel.title}</span>
@@ -215,6 +196,69 @@ const NovelDetails: ServerComponent<object, Params> = async ({ params: { slug } 
                             <span>Like</span>
                         </button>
                     </div>
+                </div>
+
+                {/* Novel awards and author support */}
+                <div className="md:col-span-4 lg:col-span-3">
+                    {/* Novel awards */}
+                    <div className="flex flex-col space-y-2">
+                        <h4 className="text-2xl font-bold">Awards & Power-ups</h4>
+                        <div className="grid grid-cols-5 gap-x-2 gap-y-4">
+                            {badges.map(({ icon, title }, idx) => {
+                                return (
+                                    <button
+                                        type="button"
+                                        className="flex items-center justify-center transition-colors duration-300 rounded-lg aspect-square hover:bg-gray-100"
+                                        key={idx}
+                                        title={title}
+                                    >
+                                        <Image
+                                            src={icon}
+                                            className="object-contain w-3/4 aspect-square"
+                                            alt={title}
+                                        />
+                                    </button>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Details and chapters */}
+                <div className="md:col-span-8 lg:col-span-9 md:pl-10 xl:pl-20">
+                    {/* Summary */}
+                    {novel.summary && (
+                        <div className="flex flex-col mb-8 space-y-4">
+                            <div className="flex items-center space-x-6">
+                                <h4 className="text-2xl font-bold text-gray-800">Summary</h4>
+                                <div className="flex-1 h-px bg-gray-300" />
+                            </div>
+                            <div className="p-6 bg-gray-100 rounded-2xl">{novel.summary}</div>
+                        </div>
+                    )}
+
+                    {/* Tags */}
+                    {novel.tags && novel.tags.length > 0 && (
+                        <div className="flex flex-col mb-4 space-y-4">
+                            <div className="flex items-center space-x-6">
+                                <h4 className="text-2xl font-bold text-gray-800">Tags</h4>
+                                <div className="flex-1 h-px bg-gray-300" />
+                            </div>
+                            <div className="flex flex-wrap">
+                                {novel.tags.map(({ id, name, slug }) => {
+                                    return (
+                                        <Link
+                                            href={`/tags/${slug}`}
+                                            key={id}
+                                            className="inline-flex items-center h-8 px-2 mb-1 mr-2 text-sm font-semibold text-red-500 transition-colors rounded-full 5 whitespace-nowrap hover:bg-red-50"
+                                        >
+                                            #{name}
+                                        </Link>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    )}
                 </div>
             </Container>
         </Page>
