@@ -18,6 +18,7 @@ import badges from './awards';
 
 import badge6 from 'assets/icons/badge-6.png';
 import badge3 from 'assets/icons/badge-3.png';
+import { prefixAssetPath, prefixSitePath } from 'utils';
 
 interface Params extends Record<string, string> {
     slug: string;
@@ -263,6 +264,24 @@ const NovelDetails: ServerComponent<object, Params> = async ({ params: { slug } 
             </Container>
         </Page>
     );
+};
+
+export const generateMetadata: MetadataFn<Params> = async ({ params: { slug } }) => {
+    const novel = await getNovel(slug);
+
+    if (!novel) return {};
+
+    return {
+        title: novel.title,
+        description: `Read ${novel.title} in your favorite language on ${process.env.NEXT_PUBLIC_APP_NAME}, the best web novels reading site!`,
+        authors: [{ name: novel.author.name, url: prefixSitePath(`authors/${novel.author.slug}`) }],
+        openGraph: {
+            title: novel.title,
+            description: `Read ${novel.title} in your favorite language on ${process.env.NEXT_PUBLIC_APP_NAME}, the best web novels reading site!`,
+            images: [prefixAssetPath(novel.thumbnail)],
+            type: 'book',
+        },
+    };
 };
 
 export const revalidate = 0;

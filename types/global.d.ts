@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import type { Metadata, ResolvingMetadata } from 'next';
 
 declare global {
     namespace NodeJS {
@@ -6,11 +7,14 @@ declare global {
             // Application configurations
             readonly NEXT_PUBLIC_APP_NAME?: string;
             readonly NEXT_PUBLIC_APP_DESCRIPTION?: string;
-            readonly NEXT_PUBLIC_BACKEND_URL?: string;
+            readonly NEXT_PUBLIC_APP_URL?: string;
 
             // Image optimization configurations
             readonly NEXT_PUBLIC_IMAGES_HOSTNAME?: string;
             readonly NEXT_PUBLIC_IMAGES_PATHNAME?: string;
+
+            // API Endpoints
+            readonly NEXT_PUBLIC_BACKEND_URL?: string;
 
             // Auth configurations
             readonly SYSTEM_API_TOKEN?: string;
@@ -28,6 +32,13 @@ declare global {
     type ServerComponent<P = object, E extends Params = object> = (
         props: P & { params: E }
     ) => Promise<ReactNode> | ReactNode;
+    type MetadataFn<
+        P extends Record<string, string> = object,
+        S extends Record<string, string> = object
+    > = (
+        props: { params: P; searchParams: S },
+        parent: ResolvingMetadata
+    ) => Metadata | Promise<Metadata>;
 }
 
 export {};
