@@ -5,7 +5,7 @@ import classNames from 'classnames';
 const Loading: FC = () => {
     return (
         <Container wrapperClassName="max-sm:max-w-full" className="max-sm:mx-0">
-            <div className="flex w-full space-x-4 overflow-x-hidden h-76 lg:h-80">
+            <div className="flex w-full space-x-4 overflow-x-hidden h-76 lg:h-82">
                 {Array.from({ length: 10 }).map((_, idx) => {
                     const [isFirst, isLast] = [idx === 0, idx === 9];
 

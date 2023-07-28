@@ -11,15 +11,15 @@ import {
     faPlus,
     faStar,
 } from '@fortawesome/free-solid-svg-icons';
+import { prefixAssetPath, prefixSitePath } from 'utils';
 import { Container, Page } from 'components/common';
-import { Thumbnail } from './_server-components';
-import { getNovel } from './queries';
+import { Recommendations, Thumbnail } from './_server-components';
+import { Tabs } from './_client-components';
 import badges from './awards';
+import { getNovel } from './queries';
 
 import badge6 from 'assets/icons/badge-6.png';
 import badge3 from 'assets/icons/badge-3.png';
-import { prefixAssetPath, prefixSitePath } from 'utils';
-import { Tabs } from './_client-components';
 
 interface Params extends Record<string, string> {
     slug: string;
@@ -228,7 +228,8 @@ const NovelDetails: ServerComponent<object, Params> = async ({ params: { slug } 
 
                 {/* Details and chapters */}
                 <div className="md:col-span-8 lg:col-span-9 md:pl-10 xl:pl-20">
-                    <Tabs summary={novel.summary} tags={novel.tags} />
+                    <Tabs summary={novel.summary} tags={novel.tags} className="mb-8" />
+                    <Recommendations />
                 </div>
             </Container>
         </Page>

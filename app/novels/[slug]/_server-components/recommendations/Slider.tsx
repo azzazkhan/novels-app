@@ -1,12 +1,12 @@
 'use client';
 
-import type { FC } from 'react';
-import type { Novel } from 'types/resources';
-import Link from 'next/link';
-import Image from 'next/image';
 import classNames from 'classnames';
+import Image from 'next/image';
+import Link from 'next/link';
+import type { FC } from 'react';
 import { Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import type { Novel } from 'types/resources';
 import { prefixAssetPath } from 'utils';
 
 import 'swiper/css';
@@ -20,7 +20,7 @@ const Slider: FC<Props> = ({ novels }) => {
     return (
         <Swiper
             slidesPerView="auto"
-            className="select-none h-76 lg:h-82"
+            className="overflow-hidden select-none h-76 lg:h-82"
             pagination={{
                 clickable: true,
                 bulletClass: 'swiper-pagination-bullet bg-black !rounded-full opacity-40',
@@ -30,16 +30,9 @@ const Slider: FC<Props> = ({ novels }) => {
         >
             {novels.map((novel, idx) => {
                 const { title, slug, thumbnail } = novel;
-                const [isFirst, isLast] = [idx === 0, idx === novels.length - 1];
 
                 return (
-                    <SwiperSlide
-                        className={classNames('!w-[auto]', {
-                            'max-sm:ml-[calc(2.5%+1rem)]': isFirst,
-                            'max-sm:mr-[calc(2.5%+1rem)]': isLast,
-                        })}
-                        key={idx}
-                    >
+                    <SwiperSlide key={novel.id} className="!w-auto">
                         <Link
                             href={`/novels/${slug}`}
                             className={classNames('block', { 'ml-4': idx > 0 })}
