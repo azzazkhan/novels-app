@@ -228,7 +228,12 @@ const NovelDetails: ServerComponent<object, Params> = async ({ params: { slug } 
 
                 {/* Details and chapters */}
                 <div className="md:col-span-8 lg:col-span-9 md:pl-10 xl:pl-20">
-                    <Tabs summary={novel.summary} tags={novel.tags} className="mb-8" />
+                    <Tabs
+                        slug={novel.slug}
+                        summary={novel.summary}
+                        tags={novel.tags}
+                        className="mb-8"
+                    />
                     <Recommendations />
                 </div>
             </Container>
