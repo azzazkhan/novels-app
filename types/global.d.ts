@@ -8,6 +8,10 @@ declare global {
             readonly NEXT_PUBLIC_APP_DESCRIPTION?: string;
             readonly NEXT_PUBLIC_BACKEND_URL?: string;
 
+            // Image optimization configurations
+            readonly NEXT_PUBLIC_IMAGES_HOSTNAME?: string;
+            readonly NEXT_PUBLIC_IMAGES_PATHNAME?: string;
+
             // Auth configurations
             readonly SYSTEM_API_TOKEN?: string;
             readonly NEXTAUTH_SECRET?: string;
