@@ -21,7 +21,7 @@ interface Props {
 const Tabs: FC<Props> = ({ slug, tags, summary, className }) => {
     return (
         <div className={classNames(className)}>
-            <Tab.Group defaultIndex={1}>
+            <Tab.Group>
                 <Tab.List className="flex items-center space-x-4">
                     <Tab
                         className={({ selected }) =>
