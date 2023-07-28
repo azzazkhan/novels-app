@@ -1,8 +1,8 @@
 import type { FC } from 'react';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
-import reviews from './reviews';
+import { faFlag, faReply, faStar } from '@fortawesome/free-solid-svg-icons';
+import reviews from '../_server-components/reviews';
 
 interface Props {
     className?: ClassName;
@@ -109,6 +109,22 @@ const Reviews: FC<Props> = ({ className, type }) => {
                                     </div>
                                 </div>
                                 <p className="mt-2 text-sm text-gray-600">{content}</p>
+                                <div className="flex flex-wrap items-center mt-1">
+                                    <button
+                                        type="button"
+                                        className="inline-flex items-center space-x-1.5 h-7 rounded-lg text-gray-500 transition-colors text-xs px-3 hover:bg-gray-200 hover:text-black mb-2 mr-2"
+                                    >
+                                        <FontAwesomeIcon icon={faReply} />
+                                        <span>Reply</span>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="inline-flex items-center space-x-1.5 h-7 rounded-lg text-gray-500 transition-colors text-xs px-3 hover:bg-gray-200 hover:text-black mb-2 mr-2"
+                                    >
+                                        <FontAwesomeIcon icon={faFlag} />
+                                        <span>Report</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     );
