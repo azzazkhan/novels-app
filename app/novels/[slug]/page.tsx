@@ -12,7 +12,7 @@ import {
     faStar,
 } from '@fortawesome/free-solid-svg-icons';
 import { Container, Page } from 'components/common';
-import { Thumbnail } from './_components';
+import { Reviews, Summary, Tags, Thumbnail } from './_components';
 import { getNovel } from './queries';
 import badges from './awards';
 
@@ -227,39 +227,9 @@ const NovelDetails: ServerComponent<object, Params> = async ({ params: { slug } 
 
                 {/* Details and chapters */}
                 <div className="md:col-span-8 lg:col-span-9 md:pl-10 xl:pl-20">
-                    {/* Summary */}
-                    {novel.summary && (
-                        <div className="flex flex-col mb-8 space-y-4">
-                            <div className="flex items-center space-x-6">
-                                <h4 className="text-2xl font-bold text-gray-800">Summary</h4>
-                                <div className="flex-1 h-px bg-gray-300" />
-                            </div>
-                            <div className="p-6 bg-gray-100 rounded-2xl">{novel.summary}</div>
-                        </div>
-                    )}
-
-                    {/* Tags */}
-                    {novel.tags && novel.tags.length > 0 && (
-                        <div className="flex flex-col mb-4 space-y-4">
-                            <div className="flex items-center space-x-6">
-                                <h4 className="text-2xl font-bold text-gray-800">Tags</h4>
-                                <div className="flex-1 h-px bg-gray-300" />
-                            </div>
-                            <div className="flex flex-wrap">
-                                {novel.tags.map(({ id, name, slug }) => {
-                                    return (
-                                        <Link
-                                            href={`/tags/${slug}`}
-                                            key={id}
-                                            className="inline-flex items-center h-8 px-2 mb-1 mr-2 text-sm font-semibold text-red-500 transition-colors rounded-full 5 whitespace-nowrap hover:bg-red-50"
-                                        >
-                                            #{name}
-                                        </Link>
-                                    );
-                                })}
-                            </div>
-                        </div>
-                    )}
+                    <Summary summary={novel.summary} className="mb-8" />
+                    <Tags tags={novel.tags} className="mb-8" />
+                    <Reviews type="novel" />
                 </div>
             </Container>
         </Page>

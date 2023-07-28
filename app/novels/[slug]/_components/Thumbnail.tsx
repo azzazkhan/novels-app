@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import Link from 'next/link';
 import Image, { StaticImageData } from 'next/image';
 import classNames from 'classnames';
 import { prefixAssetPath } from 'utils';
@@ -28,16 +29,22 @@ const Thumbnail: FC<Props> = ({ image, title, type, rank, className }) => {
         >
             {/* Type Novel/Comic */}
             {itemType && (
-                <span className="absolute inline-flex items-center h-6 px-2.5 font-bold text-white uppercase bg-black rounded-full text-xxs top-2 left-2">
+                <Link
+                    href={`/browser?type=${type}`}
+                    className="absolute inline-flex items-center h-6 px-2.5 font-bold text-white uppercase bg-black rounded-full text-xxs top-2 left-2 select-none transition-colors hover:bg-gray-800"
+                >
                     {itemType}
-                </span>
+                </Link>
             )}
 
             {/* Ranking */}
             {rank && (
-                <span className="absolute inline-flex items-center h-6 px-2.5 font-bold text-white uppercase bg-violet-900 rounded-full text-xxs top-2 right-2">
+                <Link
+                    href="/rankings"
+                    className="absolute inline-flex items-center h-6 px-2.5 font-bold text-white uppercase bg-violet-900 rounded-full text-xxs top-2 right-2 select-none transition-colors hover:bg-violet-800"
+                >
                     #{rank} Ranked
-                </span>
+                </Link>
             )}
 
             <Image
