@@ -20,19 +20,6 @@ const NovelDetails: ServerComponent<object, Params> = async ({ params: { slug } 
     const { title, alt_title, author, categories, chapters_count, completed, likes_count, views } =
         novel;
 
-    /**
-     * 1. Name (Done)
-     * 2. Alt Name (Done)
-     * 3. Author (Done)
-     * 4. Likes (Done)
-     * 5. Views (Done)
-     * 8. Rank (Done)
-     * 7. Actions (Library / Read)
-     * 8. Chapter count (Done)
-     * 9. Report button
-     * 8. Rating (Done)
-     */
-
     return (
         <Page>
             <Container className="grid md:grid-cols-12 lg:grid-cols-12 gap-y-10 md:gap-y-6">
@@ -84,16 +71,14 @@ const NovelDetails: ServerComponent<object, Params> = async ({ params: { slug } 
 
                 {/* Details and chapters */}
                 <div className="md:col-span-8 lg:col-span-9 md:pl-10 xl:pl-20">
-                    <Tabs
-                        summary={novel.summary}
-                        tags={novel.tags}
-                        className="mb-8"
-                        chapters={
-                            <SeriesProvider novelSlug={slug}>
-                                <NovelSeries novelSlug={slug} />
-                            </SeriesProvider>
-                        }
-                    />
+                    <SeriesProvider novelSlug={novel.slug}>
+                        <Tabs
+                            summary={novel.summary}
+                            tags={novel.tags}
+                            className="mb-8"
+                            chapters={<NovelSeries novelSlug={slug} />}
+                        />
+                    </SeriesProvider>
                     <Recommendations />
                 </div>
             </Container>

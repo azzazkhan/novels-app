@@ -15,10 +15,11 @@ export interface SeriesContextValue {
     >;
     status?: AsyncStatus;
     paginationStatus?: AsyncStatus;
+    nextPageUrl?: string;
 
-    getInitialSeries: (force?: boolean) => void;
+    getInitialSeries: (force?: boolean, limit?: number) => void;
     getMoreSeries: () => void;
-    getChapters: (seriesIndex: number, force?: boolean) => void;
+    getChapters: (seriesIndex: number, force?: boolean, limit?: number) => void;
     getMoreChapters: (seriesIndex: number) => void;
 }
 

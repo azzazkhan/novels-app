@@ -1,8 +1,9 @@
 'use client';
 
 import { FC, useEffect } from 'react';
-import SeriesLoading from './SeriesLoading';
+import classNames from 'classnames';
 import { useSeries } from 'hooks';
+import SeriesLoading from './SeriesLoading';
 import Series from './Series';
 import ChapterLoading from './ChapterLoading';
 import Chapter from './Chapter';
@@ -12,7 +13,8 @@ interface Props {
 }
 
 const NovelSeries: FC<Props> = ({ novelSlug }) => {
-    const { series, status, getInitialSeries } = useSeries();
+    const { series, status, nextPageUrl, paginationStatus, getInitialSeries, getMoreSeries } =
+        useSeries();
 
     useEffect(() => {
         getInitialSeries();
@@ -78,6 +80,40 @@ const NovelSeries: FC<Props> = ({ novelSlug }) => {
                         </Series>
                     );
                 })}
+
+            {/* Skeleton loader for loading more series (should be after series) */}
+            {paginationStatus === 'loading' &&
+                Array.from({ length: 3 }).map((_, idx) => {
+                    return <SeriesLoading key={idx} />;
+                })}
+            <div
+                className={classNames(
+                    'flex items-center justify-center pt-2 opacity-0 invisible pointer-events-none',
+                    {
+                        '!opacity-100 !visible !pointer-events-auto':
+                            status === 'success' &&
+                            nextPageUrl &&
+                            paginationStatus !== 'error' &&
+                            paginationStatus !== 'loading',
+                    }
+                )}
+            >
+                <button
+                    type="button"
+                    onClick={getMoreSeries}
+                    disabled={
+                        !(
+                            status === 'success' &&
+                            nextPageUrl &&
+                            paginationStatus !== 'error' &&
+                            paginationStatus !== 'loading'
+                        )
+                    }
+                    className="inline-flex items-center h-12 px-4 font-bold transition-colors rounded-lg hover:bg-gray-200"
+                >
+                    Load More
+                </button>
+            </div>
         </div>
     );
 };

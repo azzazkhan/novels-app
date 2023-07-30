@@ -18,14 +18,14 @@ const SeriesProvider: FC<Props> = ({ novelSlug, children }) => {
     const [nextPageUrl, setNextPageUrl] = useState<string>();
     const [paginationStatus, setPaginationStatus] = useState<Context['paginationStatus']>();
 
-    const getInitialSeries: Context['getInitialSeries'] = (force) => {
+    const getInitialSeries: Context['getInitialSeries'] = (force, limit = 50) => {
         // If we've already fetched series data or request is already sent then
         // do not initialize again
         if ((!force && series.length) || status === 'loading') return;
 
         setStatus('loading');
         axios
-            .get(`v1/novels/${novelSlug}/series`)
+            .get(`v1/novels/${novelSlug}/series?limit=${limit}`)
             .then((res: AxiosResponse<PaginatedResponse<Series[]>>) => {
                 const { data, next_page_url } = res.data;
                 setSeries(() => data.map((series) => ({ ...series, chapters: [] })));
@@ -61,7 +61,7 @@ const SeriesProvider: FC<Props> = ({ novelSlug, children }) => {
             });
     };
 
-    const getChapters: Context['getChapters'] = (seriesIndex: number, force) => {
+    const getChapters: Context['getChapters'] = (seriesIndex: number, force, limit = 100) => {
         // If we've already fetched chapters data or request is already sent
         // then do not initialize again
         if (
@@ -78,7 +78,9 @@ const SeriesProvider: FC<Props> = ({ novelSlug, children }) => {
         });
 
         axios
-            .get(`v1/novels/${novelSlug}/series/${series[seriesIndex].slug}/chapters`)
+            .get(
+                `v1/novels/${novelSlug}/series/${series[seriesIndex].slug}/chapters?limit=${limit}`
+            )
             .then((res: AxiosResponse<PaginatedResponse<Omit<Chapter, 'content'>[]>>) => {
                 const { data, next_page_url } = res.data;
 
@@ -159,13 +161,14 @@ const SeriesProvider: FC<Props> = ({ novelSlug, children }) => {
             series,
             status,
             paginationStatus,
+            nextPageUrl,
             getInitialSeries,
             getMoreSeries,
             getChapters,
             getMoreChapters,
         }),
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        [series, status, paginationStatus]
+        [series, status, paginationStatus, nextPageUrl]
     );
 
     return <SeriesContext.Provider value={value}>{children}</SeriesContext.Provider>;
