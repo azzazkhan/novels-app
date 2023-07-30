@@ -18,7 +18,7 @@ interface Props {
 const Tabs: FC<Props> = ({ tags, summary, chapters, className }) => {
     return (
         <div className={classNames(className)}>
-            <Tab.Group defaultIndex={1}>
+            <Tab.Group>
                 <Tab.List className="flex items-center space-x-4">
                     {['Details', 'Chapters'].map((label, idx) => {
                         return (

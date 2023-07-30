@@ -18,7 +18,7 @@ const SeriesProvider: FC<Props> = ({ novelSlug, children }) => {
     const [nextPageUrl, setNextPageUrl] = useState<string>();
     const [paginationStatus, setPaginationStatus] = useState<Context['paginationStatus']>();
 
-    const getInitialSeries: Context['getInitialSeries'] = (force, limit = 50) => {
+    const getInitialSeries: Context['getInitialSeries'] = (force, limit = 20) => {
         // If we've already fetched series data or request is already sent then
         // do not initialize again
         if ((!force && series.length) || status === 'loading') return;
@@ -61,7 +61,7 @@ const SeriesProvider: FC<Props> = ({ novelSlug, children }) => {
             });
     };
 
-    const getChapters: Context['getChapters'] = (seriesIndex: number, force, limit = 100) => {
+    const getChapters: Context['getChapters'] = (seriesIndex: number, force, limit = 50) => {
         // If we've already fetched chapters data or request is already sent
         // then do not initialize again
         if (
