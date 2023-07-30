@@ -42,6 +42,24 @@ export interface Novel extends DeletableModel, HasUuid {
     author_id: number;
 }
 
+export interface Series extends Model, HasUuid {
+    name: string;
+    slug: string;
+    description: string;
+    novel_id: string;
+}
+
+export interface Chapter extends DeletableModel, HasUuid {
+    slug: string;
+    name: string;
+    number: number;
+    notes: string;
+    content: string;
+    word_count: number;
+    views: number;
+    series_id: number;
+}
+
 export interface Category extends Model {
     name: string;
     slug: string;

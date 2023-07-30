@@ -4,7 +4,7 @@ import { axios } from 'lib/axios';
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 
-const useAxios = () => {
+export const useAxios = () => {
     const { data: session } = useSession();
 
     useEffect(() => {
@@ -20,5 +20,3 @@ const useAxios = () => {
 
     return axios;
 };
-
-export default useAxios;
