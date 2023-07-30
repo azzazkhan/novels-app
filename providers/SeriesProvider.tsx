@@ -26,7 +26,7 @@ const SeriesProvider: FC<Props> = ({ novelSlug, children }) => {
         setStatus('loading');
         axios
             .get(`v1/novels/${novelSlug}/series?limit=${limit}`)
-            .then((res: AxiosResponse<PaginatedResponse<Series[]>>) => {
+            .then((res: AxiosResponse<CursorPaginatedResponse<Series[]>>) => {
                 const { data, next_page_url } = res.data;
                 setSeries(() => data.map((series) => ({ ...series, chapters: [] })));
                 setNextPageUrl(next_page_url);
@@ -45,7 +45,7 @@ const SeriesProvider: FC<Props> = ({ novelSlug, children }) => {
         setPaginationStatus('loading');
         axios
             .get(nextPageUrl)
-            .then((res: AxiosResponse<PaginatedResponse<Series[]>>) => {
+            .then((res: AxiosResponse<CursorPaginatedResponse<Series[]>>) => {
                 const { data, next_page_url } = res.data;
                 const series: Context['series'] = data.map((series) => ({
                     ...series,
@@ -81,7 +81,7 @@ const SeriesProvider: FC<Props> = ({ novelSlug, children }) => {
             .get(
                 `v1/novels/${novelSlug}/series/${series[seriesIndex].slug}/chapters?limit=${limit}`
             )
-            .then((res: AxiosResponse<PaginatedResponse<Omit<Chapter, 'content'>[]>>) => {
+            .then((res: AxiosResponse<CursorPaginatedResponse<Omit<Chapter, 'content'>[]>>) => {
                 const { data, next_page_url } = res.data;
 
                 // Loop through all series and set the status and chapters of
@@ -127,7 +127,7 @@ const SeriesProvider: FC<Props> = ({ novelSlug, children }) => {
 
         axios
             .get(series[seriesIndex].nextPageUrl!)
-            .then((res: AxiosResponse<PaginatedResponse<Omit<Chapter, 'content'>[]>>) => {
+            .then((res: AxiosResponse<CursorPaginatedResponse<Omit<Chapter, 'content'>[]>>) => {
                 const { data, next_page_url } = res.data;
 
                 // Loop through all series and set the pagination status and

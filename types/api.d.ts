@@ -25,6 +25,16 @@ declare global {
 
         links: { url?: string; label: string; active: boolean }[];
     }
+
+    interface CursorPaginatedResponse<D = unknown> {
+        data: D;
+        path: string;
+        per_page: string;
+        next_cursor: string;
+        prev_cursor: string;
+        next_page_url: string;
+        prev_page_url: string;
+    }
 }
 
 export {};

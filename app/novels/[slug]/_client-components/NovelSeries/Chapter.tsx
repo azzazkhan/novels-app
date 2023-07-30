@@ -20,6 +20,7 @@ const Chapter: FC<Props> = ({ name, url, number, date, locked }) => {
                 'pointer-events-none': locked,
                 'transition-colors hover:bg-gray-200': !locked,
             })}
+            prefetch={false}
         >
             <div className="flex flex-col flex-1">
                 <h2 className="text-lg font-bold line-clamp-1">
