@@ -10,7 +10,7 @@ export interface SeriesContextValue {
             status?: AsyncStatus;
             paginationStatus?: AsyncStatus;
             nextPageUrl?: string;
-            chapters: Chapter[];
+            chapters: Omit<Chapter, 'content'>[];
         }
     >;
     status?: AsyncStatus;

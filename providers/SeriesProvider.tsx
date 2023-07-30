@@ -11,7 +11,7 @@ interface Props {
     children?: ReactNode;
 }
 
-export const SeriesProvider: FC<Props> = ({ novelSlug, children }) => {
+const SeriesProvider: FC<Props> = ({ novelSlug, children }) => {
     const axios = useAxios();
     const [series, setSeries] = useState<Context['series']>([]);
     const [status, setStatus] = useState<Context['status']>();
@@ -79,7 +79,7 @@ export const SeriesProvider: FC<Props> = ({ novelSlug, children }) => {
 
         axios
             .get(`v1/novels/${novelSlug}/series/${series[seriesIndex].slug}/chapters`)
-            .then((res: AxiosResponse<PaginatedResponse<Chapter[]>>) => {
+            .then((res: AxiosResponse<PaginatedResponse<Omit<Chapter, 'content'>[]>>) => {
                 const { data, next_page_url } = res.data;
 
                 // Loop through all series and set the status and chapters of
@@ -125,7 +125,7 @@ export const SeriesProvider: FC<Props> = ({ novelSlug, children }) => {
 
         axios
             .get(series[seriesIndex].nextPageUrl!)
-            .then((res: AxiosResponse<PaginatedResponse<Chapter[]>>) => {
+            .then((res: AxiosResponse<PaginatedResponse<Omit<Chapter, 'content'>[]>>) => {
                 const { data, next_page_url } = res.data;
 
                 // Loop through all series and set the pagination status and
@@ -170,3 +170,5 @@ export const SeriesProvider: FC<Props> = ({ novelSlug, children }) => {
 
     return <SeriesContext.Provider value={value}>{children}</SeriesContext.Provider>;
 };
+
+export default SeriesProvider;

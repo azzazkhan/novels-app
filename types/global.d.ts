@@ -25,6 +25,7 @@ declare global {
 
     type ClassName = string | undefined | null | string[] | Record<string, unknown>;
     type Nullable<T = unknown> = T | null;
+
     type Params = Record<
         string,
         string | string[] | number | number[] | null | boolean | undefined
@@ -39,6 +40,8 @@ declare global {
         props: { params: P; searchParams: S },
         parent: ResolvingMetadata
     ) => Metadata | Promise<Metadata>;
+
+    type AsyncState = 'idle' | 'loading' | 'success' | 'failed';
 }
 
 export {};

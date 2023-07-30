@@ -6,6 +6,8 @@ export interface Novel extends NovelModel {
     author: Author;
     categories: Category[];
     tags: Tag[];
+    chapters_count: number;
+    likes_count: number;
 }
 
 export const getNovel = async (slug: string) => {
