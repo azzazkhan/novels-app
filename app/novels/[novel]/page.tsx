@@ -9,10 +9,10 @@ import { getNovel } from './queries';
 import badges from './awards';
 
 interface Params extends Record<string, string> {
-    slug: string;
+    novel: string;
 }
 
-const NovelDetails: ServerComponent<object, Params> = async ({ params: { slug } }) => {
+const NovelDetails: ServerComponent<object, Params> = async ({ params: { novel: slug } }) => {
     const novel = await getNovel(slug);
 
     if (!novel) return notFound();
@@ -86,7 +86,7 @@ const NovelDetails: ServerComponent<object, Params> = async ({ params: { slug } 
     );
 };
 
-export const generateMetadata: MetadataFn<Params> = async ({ params: { slug } }) => {
+export const generateMetadata: MetadataFn<Params> = async ({ params: { novel: slug } }) => {
     const novel = await getNovel(slug);
 
     if (!novel) return {};

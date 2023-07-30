@@ -48,15 +48,7 @@ const NovelSeries: FC<Props> = ({ novelSlug }) => {
                 series.length > 0 &&
                 series.map(
                     (
-                        {
-                            name,
-                            slug: seriesSlug,
-                            uuid,
-                            chapters,
-                            status,
-                            nextPageUrl,
-                            paginationStatus,
-                        },
+                        { name, uuid, chapters, status, nextPageUrl, paginationStatus },
                         seriesIdx
                     ) => {
                         return (
@@ -90,7 +82,7 @@ const NovelSeries: FC<Props> = ({ novelSlug }) => {
                                                 name={name}
                                                 date={created_at}
                                                 number={number}
-                                                url={`/novels/${novelSlug}/series/${seriesSlug}/chapter/${chapterSlug}`}
+                                                url={`/novels/${novelSlug}/chapters/${chapterSlug}`}
                                                 locked={!(seriesIdx === 0 && chapterIdx <= 4)}
                                                 key={uuid}
                                             />
