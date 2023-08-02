@@ -20,7 +20,7 @@ const Slider: FC<Props> = ({ novels }) => {
     return (
         <Swiper
             slidesPerView="auto"
-            className="overflow-hidden select-none h-76 lg:h-82"
+            className="w-full overflow-hidden select-none h-76 lg:h-82"
             pagination={{
                 clickable: true,
                 bulletClass: 'swiper-pagination-bullet bg-black !rounded-full opacity-40',

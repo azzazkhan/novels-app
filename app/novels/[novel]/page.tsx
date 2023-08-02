@@ -70,7 +70,7 @@ const NovelDetails: ServerComponent<object, Params> = async ({ params: { novel: 
                 </div>
 
                 {/* Details and chapters */}
-                <div className="md:col-span-8 lg:col-span-9 md:pl-10 xl:pl-20">
+                <div className="max-w-full overflow-hidden md:col-span-8 lg:col-span-9 md:pl-10 xl:pl-20">
                     <SeriesProvider novelSlug={novel.slug}>
                         <Tabs
                             summary={novel.summary}
@@ -79,7 +79,7 @@ const NovelDetails: ServerComponent<object, Params> = async ({ params: { novel: 
                             chapters={<NovelSeries novelSlug={slug} />}
                         />
                     </SeriesProvider>
-                    <Recommendations />
+                    <Recommendations className="max-w-full overflow-hidden" />
                 </div>
             </Container>
         </Page>

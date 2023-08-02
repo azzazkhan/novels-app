@@ -23,9 +23,9 @@ const Reviews: FC<Props> = ({ className, type }) => {
                 <h4 className="text-2xl font-bold text-gray-800">Reviews</h4>
                 <div className="flex-1 h-px bg-gray-300" />
             </div>
-            <div className="grid grid-cols-12 mb-8 gap-x-10">
+            <div className="grid mb-8 gap-y-10 sm:grid-cols-12 gap-x-4 md:grid-cols-1 md:gap-x-10 lg:grid-cols-12">
                 {/* Review groups (bars) */}
-                <div className="col-span-7">
+                <div className="sm:col-span-7 md:col-span-1 lg:col-span-7">
                     <div className="flex items-center space-x-2">
                         <div className="flex items-center space-x-1 text-xl">
                             <FontAwesomeIcon icon={faStar} className="text-amber-400" />
@@ -62,7 +62,7 @@ const Reviews: FC<Props> = ({ className, type }) => {
                 </div>
 
                 {/* Write review section */}
-                <div className="flex flex-col items-center justify-center col-span-5 text-center">
+                <div className="flex flex-col items-center justify-center text-center sm:col-span-5 md:col-span-1 lg:col-span-5">
                     <h3 className="mb-1 text-xl font-semibold">Share your thoughts</h3>
                     <p className="text-sm text-gray-700">
                         If you&apos;ve read this <span className="lowercase">{itemType}</span>, then
