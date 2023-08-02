@@ -5,6 +5,8 @@ declare global {
 
     type APIError = { message: string; errors?: Record<string, string[]> };
 
+    type AsyncState = 'loading' | 'error' | 'success';
+
     interface PaginatedResponse<D = unknown> {
         current_page: number;
         last_page: number;

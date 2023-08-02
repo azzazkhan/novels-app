@@ -18,8 +18,8 @@ interface Props {
     children?: ReactNode;
 }
 
-const DEFAULT_FONT: Context['font'] = 'nunito';
-const DEFAULT_SIZE: Context['size'] = 16;
+const DEFAULT_FONT_FACE: Context['fontFace'] = 'nunito';
+const DEFAULT_SIZE_SIZE: Context['fontSize'] = 16;
 const DEFAULT_PARAGRAPH_SPACING: Context['paragraphSpacing'] = 6;
 const DEFAULT_LINE_HEIGHT: Context['lineHeight'] = 1;
 const DEFAULT_THEME: Context['theme'] = 'light';
@@ -28,8 +28,8 @@ const DEFAULT_SPEECH_LANGUAGE: Context['speechLanguage'] = undefined;
 const DEFAULT_PLAYBACK_SPEED: Context['playbackSpeed'] = 1;
 
 const ReadingUtilsProvider: FC<Props> = ({ children }) => {
-    const [font, setFont] = useState<FontFace>('nunito');
-    const [size, setSize] = useState<FontSize>(14);
+    const [fontFace, setFontFace] = useState<FontFace>('nunito');
+    const [fontSize, setFontSize] = useState<FontSize>(14);
     const [paragraphSpacing, setParagraphSpacing] = useState<ParagraphSpacing>(6);
     const [lineHeight, setLineHeight] = useState<LineHeight>(1);
     const [theme, setTheme] = useState<Theme>('light');
@@ -38,8 +38,10 @@ const ReadingUtilsProvider: FC<Props> = ({ children }) => {
     const [playbackSpeed, setPlaybackSpeed] = useState<PlaybackSpeed>(1);
     const [opened, setOpened] = useState(false);
 
-    const updateFont: Context['setFont'] = (font) => setFont(() => font || DEFAULT_FONT);
-    const updateSize: Context['setSize'] = (size) => setSize(() => size || DEFAULT_SIZE);
+    const updateFontFace: Context['setFontFace'] = (font) =>
+        setFontFace(() => font || DEFAULT_FONT_FACE);
+    const updateFontSize: Context['setFontSize'] = (size) =>
+        setFontSize(() => size || DEFAULT_SIZE_SIZE);
     const updateParagraphSpacing: Context['setParagraphSpacing'] = (paragraphSpacing) =>
         setParagraphSpacing(() => paragraphSpacing || DEFAULT_PARAGRAPH_SPACING);
     const updateLineHeight: Context['setLineHeight'] = (lineHeight) =>
@@ -56,8 +58,8 @@ const ReadingUtilsProvider: FC<Props> = ({ children }) => {
 
     const value: Context = useMemo(
         () => ({
-            font,
-            size,
+            fontFace,
+            fontSize,
             paragraphSpacing,
             lineHeight,
             theme,
@@ -66,8 +68,8 @@ const ReadingUtilsProvider: FC<Props> = ({ children }) => {
             playbackSpeed,
             opened,
 
-            setFont: updateFont,
-            setSize: updateSize,
+            setFontFace: updateFontFace,
+            setFontSize: updateFontSize,
             setParagraphSpacing: updateParagraphSpacing,
             setLineHeight: updateLineHeight,
             setTheme: updateTheme,
@@ -78,8 +80,8 @@ const ReadingUtilsProvider: FC<Props> = ({ children }) => {
         }),
         // eslint-disable-next-line react-hooks/exhaustive-deps
         [
-            font,
-            size,
+            fontFace,
+            fontSize,
             paragraphSpacing,
             lineHeight,
             theme,

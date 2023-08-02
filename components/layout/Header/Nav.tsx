@@ -29,7 +29,7 @@ const Nav: FC = () => {
         <div
             ref={ref}
             className={classNames(
-                'fixed right-0 flex-1 w-full h-full bg-black/20 top-16 transition-all duration-500 backdrop-blur-md flex justify-end',
+                'fixed right-0 flex-1 w-full h-full bg-black/20 top-16 transition-all duration-500 backdrop-blur-md flex justify-end z-20',
                 'lg:static lg:bg-transparent lg:transform-none lg:!opacity-100 lg:!visible lg:backdrop-blur-none',
                 { 'visible opacity-100': opened, 'invisible opacity-0': !opened }
             )}

@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import Link from 'next/link';
 import { LockClosedIcon } from '@heroicons/react/24/solid';
 import classNames from 'classnames';
+import moment from 'moment';
 
 interface Props {
     name: string;
@@ -26,7 +27,7 @@ const Chapter: FC<Props> = ({ name, url, number, date, locked }) => {
                 <h2 className="text-lg font-bold line-clamp-1">
                     Chapter {number}: {name}
                 </h2>
-                <span className="text-sm text-gray-500">{date}</span>
+                <span className="text-sm text-gray-500">{moment(date).fromNow()}</span>
             </div>
             <div
                 className={classNames(

@@ -40,8 +40,6 @@ declare global {
         props: { params: P; searchParams: S },
         parent: ResolvingMetadata
     ) => Metadata | Promise<Metadata>;
-
-    type AsyncState = 'idle' | 'loading' | 'success' | 'failed';
 }
 
 export {};
