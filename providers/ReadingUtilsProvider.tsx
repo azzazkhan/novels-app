@@ -38,18 +38,18 @@ const ReadingUtilsProvider: FC<Props> = ({ children }) => {
     const [playbackSpeed, setPlaybackSpeed] = useState<PlaybackSpeed>(1);
     const [opened, setOpened] = useState(false);
 
-    const updateFont: Context['setFont'] = () => setFont(() => font || DEFAULT_FONT);
-    const updateSize: Context['setSize'] = () => setSize(() => size || DEFAULT_SIZE);
-    const updateParagraphSpacing: Context['setParagraphSpacing'] = () =>
+    const updateFont: Context['setFont'] = (font) => setFont(() => font || DEFAULT_FONT);
+    const updateSize: Context['setSize'] = (size) => setSize(() => size || DEFAULT_SIZE);
+    const updateParagraphSpacing: Context['setParagraphSpacing'] = (paragraphSpacing) =>
         setParagraphSpacing(() => paragraphSpacing || DEFAULT_PARAGRAPH_SPACING);
-    const updateLineHeight: Context['setLineHeight'] = () =>
+    const updateLineHeight: Context['setLineHeight'] = (lineHeight) =>
         setLineHeight(() => lineHeight || DEFAULT_LINE_HEIGHT);
-    const updateTheme: Context['setTheme'] = () => setTheme(() => theme || DEFAULT_THEME);
-    const updateTranslationLanguage: Context['setTranslationLanguage'] = () =>
+    const updateTheme: Context['setTheme'] = (theme) => setTheme(() => theme || DEFAULT_THEME);
+    const updateTranslationLanguage: Context['setTranslationLanguage'] = (translationLanguage) =>
         setTranslationLanguage(() => translationLanguage || DEFAULT_TRANSLATION_LANGUAGE);
-    const updateSpeechLanguage: Context['setSpeechLanguage'] = () =>
+    const updateSpeechLanguage: Context['setSpeechLanguage'] = (speechLanguage) =>
         setSpeechLanguage(() => speechLanguage || DEFAULT_SPEECH_LANGUAGE);
-    const updatePlaybackSpeed: Context['setPlaybackSpeed'] = () =>
+    const updatePlaybackSpeed: Context['setPlaybackSpeed'] = (playbackSpeed) =>
         setPlaybackSpeed(() => playbackSpeed || DEFAULT_PLAYBACK_SPEED);
     const updateOpened: Context['setOpened'] = (opened) =>
         setOpened((current) => (typeof opened === 'boolean' ? opened : !current));
