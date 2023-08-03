@@ -1,15 +1,28 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import classNames from 'classnames';
 import { useEventListener } from '@mantine/hooks';
 import { useReader } from 'hooks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import { FontFace, FontSize, LineHeight, ParagraphSpacing } from './controls';
+import {
+    FontFace,
+    FontSize,
+    LineHeight,
+    ParagraphSpacing,
+    PlaybackSpeed,
+    SpeechLanguage,
+    Theme,
+    TranslationLanguage,
+} from './controls';
 
 const Nav: FC = () => {
     const { opened, setOpened } = useReader();
+
+    useEffect(() => {
+        document.body.style.overflowY = opened ? 'hidden' : 'auto';
+    }, [opened]);
 
     const ref = useEventListener('click', (event) => {
         // Continue if only overlay was clicked, not any of its children
@@ -32,7 +45,7 @@ const Nav: FC = () => {
         >
             <div
                 className={classNames({
-                    'w-full h-full p-4 bg-white shadow sm:max-w-sm transition transform duration-300':
+                    'w-full h-full p-4 bg-white shadow sm:max-w-sm transition transform duration-300 overflow-y-auto':
                         true,
                     'translate-x-full': !opened,
                     'translate-x-0': opened,
@@ -52,10 +65,10 @@ const Nav: FC = () => {
                     <FontSize />
                     <ParagraphSpacing />
                     <LineHeight />
-                    {/* Theme */}
-                    {/* Translation Language */}
-                    {/* Speech Language */}
-                    {/* Playback Speed */}
+                    <Theme />
+                    <TranslationLanguage />
+                    <SpeechLanguage />
+                    <PlaybackSpeed />
                 </div>
             </div>
         </div>

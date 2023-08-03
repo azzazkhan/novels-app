@@ -24,7 +24,7 @@ const DEFAULT_PARAGRAPH_SPACING: Context['paragraphSpacing'] = 6;
 const DEFAULT_LINE_HEIGHT: Context['lineHeight'] = 1.5;
 const DEFAULT_THEME: Context['theme'] = 'light';
 const DEFAULT_TRANSLATION_LANGUAGE: Context['translationLanguage'] = 'english';
-const DEFAULT_SPEECH_LANGUAGE: Context['speechLanguage'] = undefined;
+const DEFAULT_SPEECH_LANGUAGE: Context['speechLanguage'] = 'english';
 const DEFAULT_PLAYBACK_SPEED: Context['playbackSpeed'] = 1;
 
 const ReadingUtilsProvider: FC<Props> = ({ children }) => {

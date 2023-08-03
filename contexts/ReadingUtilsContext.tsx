@@ -8,7 +8,7 @@ export type ParagraphSpacing = 6 | 8 | 10 | 14 | 16 | 20;
 export type LineHeight = 1 | 1.25 | 1.375 | 1.5 | 1.625 | 2;
 export type Theme = 'light' | 'dark' | 'solarized';
 export type TranslationLanguage = 'english' | 'french' | 'dutch' | 'espanol';
-export type SpeechLanguage = 'english' | 'french' | 'dutch' | 'espanol' | undefined;
+export type SpeechLanguage = 'english' | 'french' | 'dutch' | 'espanol';
 export type PlaybackSpeed = 0.5 | 1 | 1.5 | 2 | 2.5 | 3;
 
 export interface ReadingUtilsContextValue {
@@ -40,7 +40,7 @@ export const ReadingUtilsContext = createContext<ReadingUtilsContextValue>({
     lineHeight: 1.5,
     theme: 'light',
     translationLanguage: 'english',
-    speechLanguage: undefined,
+    speechLanguage: 'english',
     playbackSpeed: 1,
     opened: false,
 
