@@ -6,7 +6,7 @@ import { useEventListener } from '@mantine/hooks';
 import { useReader } from 'hooks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import { FontFace, FontSize } from './controls';
+import { FontFace, FontSize, LineHeight, ParagraphSpacing } from './controls';
 
 const Nav: FC = () => {
     const { opened, setOpened } = useReader();
@@ -47,11 +47,11 @@ const Nav: FC = () => {
                     <span className="font-bold">Go Back</span>
                 </button>
 
-                <div className="mt-4">
+                <div className="flex flex-col mt-4 space-y-2">
                     <FontFace />
                     <FontSize />
-                    {/* Paragraph Spacing */}
-                    {/* Line Height */}
+                    <ParagraphSpacing />
+                    <LineHeight />
                     {/* Theme */}
                     {/* Translation Language */}
                     {/* Speech Language */}

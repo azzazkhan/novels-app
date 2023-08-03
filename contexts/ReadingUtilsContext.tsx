@@ -5,7 +5,7 @@ import { createContext } from 'react';
 export type FontFace = 'nunito' | 'lora' | 'roboto' | 'merriweather';
 export type FontSize = 14 | 16 | 18 | 20 | 22 | 24 | 26 | 28;
 export type ParagraphSpacing = 6 | 8 | 10 | 14 | 16 | 20;
-export type LineHeight = 1 | 1.125 | 1.25 | 1.375 | 1.5 | 1.75 | 2 | 2.5 | 3;
+export type LineHeight = 1 | 1.25 | 1.375 | 1.5 | 1.625 | 2;
 export type Theme = 'light' | 'dark' | 'solarized';
 export type TranslationLanguage = 'english' | 'french' | 'dutch' | 'espanol';
 export type SpeechLanguage = 'english' | 'french' | 'dutch' | 'espanol' | undefined;
@@ -37,7 +37,7 @@ export const ReadingUtilsContext = createContext<ReadingUtilsContextValue>({
     fontFace: 'nunito',
     fontSize: 14,
     paragraphSpacing: 6,
-    lineHeight: 1,
+    lineHeight: 1.5,
     theme: 'light',
     translationLanguage: 'english',
     speechLanguage: undefined,

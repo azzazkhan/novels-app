@@ -21,21 +21,24 @@ interface Props {
 const DEFAULT_FONT_FACE: Context['fontFace'] = 'nunito';
 const DEFAULT_SIZE_SIZE: Context['fontSize'] = 16;
 const DEFAULT_PARAGRAPH_SPACING: Context['paragraphSpacing'] = 6;
-const DEFAULT_LINE_HEIGHT: Context['lineHeight'] = 1;
+const DEFAULT_LINE_HEIGHT: Context['lineHeight'] = 1.5;
 const DEFAULT_THEME: Context['theme'] = 'light';
 const DEFAULT_TRANSLATION_LANGUAGE: Context['translationLanguage'] = 'english';
 const DEFAULT_SPEECH_LANGUAGE: Context['speechLanguage'] = undefined;
 const DEFAULT_PLAYBACK_SPEED: Context['playbackSpeed'] = 1;
 
 const ReadingUtilsProvider: FC<Props> = ({ children }) => {
-    const [fontFace, setFontFace] = useState<FontFace>('nunito');
-    const [fontSize, setFontSize] = useState<FontSize>(14);
-    const [paragraphSpacing, setParagraphSpacing] = useState<ParagraphSpacing>(6);
-    const [lineHeight, setLineHeight] = useState<LineHeight>(1);
-    const [theme, setTheme] = useState<Theme>('light');
-    const [translationLanguage, setTranslationLanguage] = useState<TranslationLanguage>('english');
-    const [speechLanguage, setSpeechLanguage] = useState<SpeechLanguage>(undefined);
-    const [playbackSpeed, setPlaybackSpeed] = useState<PlaybackSpeed>(1);
+    const [fontFace, setFontFace] = useState<FontFace>(DEFAULT_FONT_FACE);
+    const [fontSize, setFontSize] = useState<FontSize>(DEFAULT_SIZE_SIZE);
+    const [paragraphSpacing, setParagraphSpacing] =
+        useState<ParagraphSpacing>(DEFAULT_PARAGRAPH_SPACING);
+    const [lineHeight, setLineHeight] = useState<LineHeight>(DEFAULT_LINE_HEIGHT);
+    const [theme, setTheme] = useState<Theme>(DEFAULT_THEME);
+    const [translationLanguage, setTranslationLanguage] = useState<TranslationLanguage>(
+        DEFAULT_TRANSLATION_LANGUAGE
+    );
+    const [speechLanguage, setSpeechLanguage] = useState<SpeechLanguage>(DEFAULT_SPEECH_LANGUAGE);
+    const [playbackSpeed, setPlaybackSpeed] = useState<PlaybackSpeed>(DEFAULT_PLAYBACK_SPEED);
     const [opened, setOpened] = useState(false);
 
     const updateFontFace: Context['setFontFace'] = (font) =>

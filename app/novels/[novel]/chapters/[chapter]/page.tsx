@@ -87,7 +87,7 @@ const Chapter: ServerComponent<object, Params> = async ({ params }) => {
                         </h1>
 
                         <div>
-                            <ReactMarkdown className={classNames(styles.content, 'text-justify')}>
+                            <ReactMarkdown className={classNames(styles.content)}>
                                 {chapter.content}
                             </ReactMarkdown>
                         </div>
