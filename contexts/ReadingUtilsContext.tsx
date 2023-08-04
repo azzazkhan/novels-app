@@ -36,7 +36,7 @@ export interface ReadingUtilsContextValue {
 export const ReadingUtilsContext = createContext<ReadingUtilsContextValue>({
     fontFace: 'nunito',
     fontSize: 14,
-    paragraphSpacing: 6,
+    paragraphSpacing: 14,
     lineHeight: 1.5,
     theme: 'light',
     translationLanguage: 'english',

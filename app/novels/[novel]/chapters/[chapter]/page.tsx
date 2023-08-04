@@ -1,12 +1,11 @@
 import type { Author, Chapter as ChapterModel, Novel, Series } from 'types/resources';
+import Link from 'next/link';
+import classNames from 'classnames';
 import { Container, Page } from 'components/common';
 import { client } from 'lib/axios';
-import ReactMarkdown from 'react-markdown';
-import styles from './Chapter.module.scss';
-import Link from 'next/link';
 import { ReadingUtilsProvider } from 'providers';
-import { Controls, Nav } from './_components';
-import classNames from 'classnames';
+import { Controls, Nav, Reader } from './_components';
+import { lora, merriweather, roboto } from './fonts';
 
 interface ChapterResponse extends ChapterModel {
     novel: Novel & { author: Author };
@@ -51,7 +50,14 @@ const Chapter: ServerComponent<object, Params> = async ({ params }) => {
 
     return (
         <ReadingUtilsProvider>
-            <Page className="!py-0 bg-gray-200 relative">
+            <Page
+                className={classNames(
+                    '!py-0 bg-gray-200 relative',
+                    lora.variable,
+                    merriweather.variable,
+                    roboto.variable
+                )}
+            >
                 <Nav />
 
                 <Container className="max-lg:!mx-0" wrapperClassName="max-lg:!max-w-full">
@@ -87,9 +93,7 @@ const Chapter: ServerComponent<object, Params> = async ({ params }) => {
                         </h1>
 
                         <div>
-                            <ReactMarkdown className={classNames(styles.content)}>
-                                {chapter.content}
-                            </ReactMarkdown>
+                            <Reader content={chapter.content} />
                         </div>
                     </div>
                 </Container>

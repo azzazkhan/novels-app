@@ -20,7 +20,7 @@ interface Props {
 
 const DEFAULT_FONT_FACE: Context['fontFace'] = 'nunito';
 const DEFAULT_SIZE_SIZE: Context['fontSize'] = 16;
-const DEFAULT_PARAGRAPH_SPACING: Context['paragraphSpacing'] = 6;
+const DEFAULT_PARAGRAPH_SPACING: Context['paragraphSpacing'] = 14;
 const DEFAULT_LINE_HEIGHT: Context['lineHeight'] = 1.5;
 const DEFAULT_THEME: Context['theme'] = 'light';
 const DEFAULT_TRANSLATION_LANGUAGE: Context['translationLanguage'] = 'english';

@@ -23,6 +23,9 @@ module.exports = {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
                 special: ['var(--font-merienda)'],
+                lora: ['var(--font-lora)'],
+                merriweather: ['var(--font-merriweather)'],
+                roboto: ['var(--font-roboto)'],
             },
             fontSize: {
                 xxxs: '.5rem',
