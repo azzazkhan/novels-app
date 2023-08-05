@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Input } from '../_client-components';
+import { Input, SocialIcons } from '../_client-components';
 import Link from 'next/link';
 
 const Form: FC = () => {
@@ -21,7 +21,6 @@ const Form: FC = () => {
                     required
                     togglePassword
                 />
-
                 <div className="flex items-center justify-between pt-4 space-x-1">
                     <button
                         type="submit"
@@ -37,6 +36,8 @@ const Form: FC = () => {
                         Sign up instead
                     </Link>
                 </div>
+
+                <SocialIcons />
             </form>
         </div>
     );
