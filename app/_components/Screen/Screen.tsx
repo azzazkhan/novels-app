@@ -1,7 +1,9 @@
 'use client';
 
+import type { FC } from 'react';
 import { useViewportSize } from '@mantine/hooks';
-import { FC } from 'react';
+
+import styles from './Screen.module.css';
 
 const Screen: FC = () => {
     const { height, width } = useViewportSize();
@@ -16,11 +18,11 @@ const Screen: FC = () => {
     })();
 
     return (
-        <div className="fixed top-0 right-0 z-[100] bg-gray-950/70 text-white inline-flex items-center h-10 px-6 rounded-bl-xl select-none space-x-2">
+        <div className={styles.wrapper}>
             <span>
                 {width} &times; {height}
             </span>
-            <span className="text-sm">({breakpoint})</span>
+            <span className={styles.text}>({breakpoint})</span>
         </div>
     );
 };

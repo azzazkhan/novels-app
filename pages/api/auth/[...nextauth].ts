@@ -35,7 +35,7 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
         ],
         callbacks: {
             async signIn() {
-                // Rae limiting can be implemented here, returning false will
+                // Rate limiting can be implemented here, returning false will
                 // show default error response returning a string (URL) will
                 // perform a redirect
                 // Will be called after `authorize`
