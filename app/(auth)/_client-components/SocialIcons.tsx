@@ -44,7 +44,7 @@ const SocialIcons: FC<Props> = ({ title = 'or continue with', className }) => {
                             title={title}
                             key={idx}
                         >
-                            <FontAwesomeIcon icon={icon} />
+                            <FontAwesomeIcon icon={icon} className="max-h-4" />
                         </button>
                     );
                 })}

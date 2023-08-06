@@ -78,7 +78,7 @@ const Input: ForwardRefRenderFunction<HTMLInputElement, Props> = (
                     >
                         <FontAwesomeIcon
                             icon={toggled ? faEye : faEyeSlash}
-                            className="text-sm text-gray-800 dark:text-white group-focus-within:text-black"
+                            className="text-sm text-gray-800 dark:text-white group-focus-within:text-black max-h-3.5"
                         />
                     </button>
                 )}

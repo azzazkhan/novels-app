@@ -1,4 +1,5 @@
 import type { FC, ReactNode } from 'react';
+import NextTopLoader from 'nextjs-toploader';
 import { MantineProvider, ReduxProvider, SessionProvider } from 'providers';
 import { Screen } from './_components';
 import { nunito } from './_fonts';
@@ -11,8 +12,6 @@ interface Props {
     children?: ReactNode;
 }
 
-// min-h-screen !overflow-x-hidden w-screen
-
 const RootLayout: FC<Props> = ({ children }) => {
     return (
         <html lang="en">
@@ -23,6 +22,17 @@ const RootLayout: FC<Props> = ({ children }) => {
                 <ReduxProvider>
                     <SessionProvider>
                         <MantineProvider>
+                            <NextTopLoader
+                                color="#2563EB"
+                                initialPosition={0.08}
+                                crawlSpeed={200}
+                                height={3}
+                                crawl
+                                showSpinner={false}
+                                easing="ease"
+                                speed={200}
+                                shadow="0 0 10px #2563EB,0 0 5px #2563EB"
+                            />
                             <Screen />
                             {children}
                         </MantineProvider>
