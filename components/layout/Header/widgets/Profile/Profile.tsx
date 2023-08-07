@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/interactive-supports-focus */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 'use client';
 
 import { FC, MouseEventHandler, useState } from 'react';
@@ -11,8 +13,12 @@ import coin from 'assets/icons/coin-32.png';
 import background from 'assets/images/covers/shooting-stars-dark-sky-girl.png';
 import Badge from './Badge';
 import items from './items';
+import { useAuth } from 'hooks';
+import { signOut } from 'next-auth/react';
 
 const Profile: FC = () => {
+    const { user } = useAuth();
+
     const [opened, setOpened] = useState(false);
     const ref = useClickOutside(() => setOpened(false));
 
@@ -27,9 +33,19 @@ const Profile: FC = () => {
             <button
                 type="button"
                 onClick={handleTriggerClick}
-                className="relative items-center justify-center hidden w-10 h-10 bg-gray-300 rounded-full cursor-pointer lg:flex"
+                className="relative items-center justify-center hidden w-10 h-10 bg-gray-300 border border-gray-200 rounded-full cursor-pointer lg:flex"
             >
-                <Image src={avatar} height={40} className="rounded-full" alt="Avatar" />
+                {user?.profile.avatar ? (
+                    <img
+                        src={user.profile.avatar}
+                        height={40}
+                        width={40}
+                        className="object-cover rounded-full"
+                        alt={user.name}
+                    />
+                ) : (
+                    <Image src={avatar} height={40} className="rounded-full" alt="Avatar" />
+                )}
                 <span className="absolute top-0 right-0 block w-2.5 h-2.5 bg-red-500 rounded-full b-2" />
             </button>
 
@@ -92,6 +108,7 @@ const Profile: FC = () => {
                     })}
 
                     <a
+                        onClick={() => signOut()}
                         role="link"
                         className="flex items-center px-5 py-3 space-x-2 text-red-600 transition-colors cursor-pointer hover:bg-red-100 lg:rounded-b-xl"
                     >

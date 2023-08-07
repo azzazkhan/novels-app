@@ -25,11 +25,21 @@ interface Props
     className?: ClassName;
     error?: ReactNode;
     togglePassword?: boolean;
-    onChange?: (val: string, event: ChangeEvent<HTMLInputElement>) => void;
+    onChange?: ChangeEventHandler<HTMLInputElement>;
+    onUpdate?: (val: string, event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Input: ForwardRefRenderFunction<HTMLInputElement, Props> = (
-    { className, error, togglePassword, type: inputType, value: inputValue, onChange, ...props },
+    {
+        className,
+        error,
+        togglePassword,
+        type: inputType,
+        value: inputValue,
+        onChange,
+        onUpdate,
+        ...props
+    },
     ref
 ) => {
     const id = useId();
@@ -50,7 +60,8 @@ const Input: ForwardRefRenderFunction<HTMLInputElement, Props> = (
 
         // If change listener is provided then provide the value as well as the
         // triggered event
-        onChange && onChange(event.target.value, event);
+        onChange && onChange(event);
+        onUpdate && onUpdate(event.target.value, event);
     };
 
     return (

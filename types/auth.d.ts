@@ -1,13 +1,13 @@
-import type { Role } from './resources';
+import type { Role, User } from './resources';
 
 export interface SessionData {
-    id: string;
     uuid: string;
     role: Role;
-    email_verified_at: Nullable<string>;
 }
 
 export interface LoginResponse {
     token: string;
-    user: SessionData;
+    user: Pick<User, 'id' | 'uuid' | 'name' | 'username' | 'email' | 'role'> & {
+        avatar: Nullable<string>;
+    };
 }

@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { layout, search } from './slices';
+import { auth, layout, search } from './slices';
 
 export const store = configureStore({
     reducer: {
+        auth,
         layout,
         search,
     },

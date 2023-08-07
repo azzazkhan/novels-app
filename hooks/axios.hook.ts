@@ -9,7 +9,7 @@ export const useAxios = () => {
 
     useEffect(() => {
         const interceptor = axios.interceptors.request.use((config) => {
-            if (!config.headers.Authorization && session?.token)
+            if (/* !config.headers.Authorization && */ session?.token)
                 config.headers.Authorization = `Bearer ${session.token}`;
 
             return config;

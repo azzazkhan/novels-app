@@ -6,14 +6,16 @@ import React, { FC } from 'react';
 import { faBarsStaggered, faCompass, faPenNib } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
 import Settings from './widgets/Settings';
-import Profile from './widgets/Profile';
+import { Profile, Loading as ProfileSkeleton, JoinBtn } from './widgets/Profile';
 import Search from './widgets/Search';
 import NavItem from './NavItem';
-import { useAppDispatch, useAppSelector } from 'hooks';
+import { useAppDispatch, useAppSelector, useAuth } from 'hooks';
 import { useEventListener } from '@mantine/hooks';
 import { toggleNavbar } from 'store/slices';
 
 const Nav: FC = () => {
+    const { user, loading: userLoading } = useAuth();
+
     const dispatch = useAppDispatch();
     const opened = useAppSelector((state) => state.layout.navbarOpened);
     const ref = useEventListener('click', (event) => {
@@ -57,7 +59,9 @@ const Nav: FC = () => {
                 <ul className="flex flex-col lg:flex-row lg:items-center lg:space-y-0 lg:space-x-2.5">
                     <Search className="hidden lg:flex" />
                     <Settings />
-                    <Profile />
+                    {userLoading && <ProfileSkeleton />}
+                    {!userLoading && user && <Profile />}
+                    {!userLoading && !user && <JoinBtn />}
                 </ul>
             </nav>
         </div>

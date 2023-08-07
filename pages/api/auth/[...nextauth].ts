@@ -1,8 +1,13 @@
+import type { LoginResponse } from 'types/auth';
+import type { User } from 'types/resources';
 import { NextApiRequest, NextApiResponse } from 'next';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { getClientIp } from 'request-ip';
-import { LoginResponse, SessionData } from 'types/auth';
+import { AxiosError } from 'axios';
+import { client } from 'lib/axios';
+
+type Token = { sub: string; token: string; user: Pick<User, 'id' | 'uuid' | 'role'> };
 
 export default async function auth(req: NextApiRequest, res: NextApiResponse) {
     return NextAuth(req, res, {
@@ -14,25 +19,38 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
                     password: {},
                 },
                 async authorize(credentials, req) {
-                    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/login`, {
-                        method: 'POST',
-                        body: JSON.stringify({
-                            username: credentials?.username,
-                            password: credentials?.password,
-                        }),
-                        headers: {
-                            'Content-Type': 'application/json',
-                            Accept: 'application/json',
-                            'X-Forwarded-For': getClientIp(req) ?? '',
-                        },
-                    });
+                    try {
+                        const response = await client.post(
+                            'login',
+                            {
+                                username: credentials?.username,
+                                password: credentials?.password,
+                            },
+                            { headers: { 'X-Forwarded-For': getClientIp(req) ?? '' } }
+                        );
 
-                    const user = await res.json();
+                        return response.data;
+                    } catch (err) {
+                        const error = err as AxiosError;
 
-                    return res.ok && user ? user : null;
+                        if (
+                            error.response &&
+                            error.response.data &&
+                            error.response.headers['content-type'] === 'application/json'
+                        ) {
+                            const res = error.response.data as APIError;
+                            throw new Error(res.message || error.response.statusText);
+                        }
+
+                        return null;
+                    }
                 },
             }),
         ],
+        pages: {
+            signIn: 'login',
+            signOut: 'logout',
+        },
         callbacks: {
             async signIn() {
                 // Rate limiting can be implemented here, returning false will
@@ -43,27 +61,28 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
 
                 return true;
             },
-            async jwt({ token, user }) {
+            async jwt({ token, user, trigger }) {
                 // Called while creating a new JWT token
                 // Login and session status routes/functions will trigger this
                 // {user, account, profile, isNewUser} will be passed on login
                 // request only and only token will be passed afterwards
 
-                console.log('In JWT callback!');
-                console.log({ token, user });
-
-                const res = user as unknown as LoginResponse;
-                token.user = res.user;
-                token.token = res.token;
+                if (trigger === 'signIn') {
+                    const data = user as unknown as LoginResponse;
+                    const { id, uuid, role } = data.user;
+                    return { sub: uuid, token: data.token, user: { id, uuid, role } } as Token;
+                }
 
                 return token;
             },
-            async session({ session, user, token }) {
-                console.log('In session callback!');
-                console.log({ session, user, token });
+            async session({ session, token: jwtToken }) {
+                // Token will be the value returned from the `jwt` callback
+                // Session will be the values exposed to the client.
+                // session = { expires: string; ...customData }
 
-                session.user = token.user as SessionData;
-                session.token = token.token as string;
+                const { token, user } = jwtToken as Token;
+                const { role, uuid } = user;
+                session = { expires: session.expires, token, user: { role, uuid } };
 
                 return session;
             },

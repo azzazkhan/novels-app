@@ -18,8 +18,6 @@ export const getNovel = async (slug: string) => {
     } catch (err) {
         const error = err as AxiosError;
 
-        console.log(error.response);
-
         if (error.response?.status === 404) return null;
 
         throw err;

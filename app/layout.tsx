@@ -7,6 +7,7 @@ import classNames from 'classnames';
 
 import 'styles/tailwind.css';
 import 'styles/app.scss';
+import { Middleware } from 'components/middleware';
 
 interface Props {
     children?: ReactNode;
@@ -21,6 +22,7 @@ const RootLayout: FC<Props> = ({ children }) => {
             >
                 <ReduxProvider>
                     <SessionProvider>
+                        <Middleware />
                         <MantineProvider>
                             <NextTopLoader
                                 color="#2563EB"
