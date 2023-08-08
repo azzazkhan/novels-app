@@ -4,7 +4,7 @@ import { FC, useEffect } from 'react';
 import type { Author, Profile, User } from 'types/resources';
 import type { AxiosResponse } from 'axios';
 import { useAppDispatch, useAppSelector, useAxios } from 'hooks';
-import { setAuthRefresh, setAuthStatus, setUser } from 'store/slices';
+import { setAuthStatus, setUser } from 'store/slices';
 import { useSession } from 'next-auth/react';
 
 interface AuthState extends User {
@@ -14,17 +14,27 @@ interface AuthState extends User {
 
 const AuthMiddleware: FC = () => {
     const axios = useAxios();
-    const { data: session } = useSession();
+    const { data: session, status: sessionStatus } = useSession();
 
     const dispatch = useAppDispatch();
     const status = useAppSelector((state) => state.auth.status);
     const user = useAppSelector((state) => state.auth.user);
 
-    // Only rerun the effect on initial load or when the user is logged in
+    // Only re-run the effect on initial load or when the user is logged in
     // eslint-disable-next-line consistent-return
     useEffect(() => {
-        // If we don't have a session then we cannot fetch the profile
-        if (!session?.token) {
+        // Note: The auth loading state should be dependent on `sessionStatus`
+        //       before relying on the store `auth.status` value because the
+        //       session token is first loaded by NextAuth which we'll use to
+        //       send the API request and we need to consider the loading of
+        //       NextAuth session as well.
+        //       This scenario is handled in the `useAuth` hook's `loading`
+        //       return value.
+
+        // We'll depend on the NextAuth's provided status before confirming the
+        // actual token. If the user is unauthenticated we'll mark the process
+        // as completed because there's nothing to fetch.
+        if (sessionStatus === 'unauthenticated' || !session?.token) {
             dispatch(setAuthStatus('success'));
             return;
         }
@@ -34,7 +44,6 @@ const AuthMiddleware: FC = () => {
         if (user || status === 'loading') return;
 
         dispatch(setAuthStatus('loading'));
-        dispatch(setAuthRefresh(undefined));
 
         axios
             .get('v1/profile?author=true')
@@ -44,7 +53,7 @@ const AuthMiddleware: FC = () => {
             })
             .catch(() => dispatch(setAuthStatus('error')));
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dispatch, user, session]);
+    }, [dispatch, user, session, sessionStatus]);
 
     return null;
 };

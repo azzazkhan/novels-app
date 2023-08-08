@@ -3,12 +3,15 @@
 import { useCallback, useEffect } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useAppSelector } from './redux.hook';
+import { useSession } from 'next-auth/react';
 
 interface Props {
     authOnly?: boolean;
 }
 
 export const useAuth = (props: Props = {}) => {
+    const { status: sessionStatus } = useSession();
+
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
@@ -29,5 +32,5 @@ export const useAuth = (props: Props = {}) => {
         if (authOnly && !loading && !user) return router.push(`/login?redirect=${url}`);
     }, [router, pathname, searchParams, loading, user, props]);
 
-    return { user, loading, logout };
+    return { user, loading: loading || sessionStatus === 'loading', logout };
 };
