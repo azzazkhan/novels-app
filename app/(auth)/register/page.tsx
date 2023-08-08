@@ -12,7 +12,7 @@ const Login: FC = () => {
 };
 
 export const metadata: Metadata = {
-    title: 'Sign In',
+    title: 'Sign up',
 };
 
 export default Login;

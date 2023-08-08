@@ -2,11 +2,11 @@
 
 import { FC, useState } from 'react';
 import Link from 'next/link';
-import { z } from 'zod';
-import { useForm } from '@mantine/form';
-import { Input, SocialIcons } from '../_client-components';
-import { signIn } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { signIn } from 'next-auth/react';
+import { useForm } from '@mantine/form';
+import { getValidationMessage } from 'utils';
+import { Input, SocialIcons } from '../_client-components';
 
 type LoginData = { username: string; password: string };
 
@@ -16,15 +16,16 @@ const Form: FC = () => {
 
     const [status, setStatus] = useState<AsyncState>();
     const [error, setError] = useState<string>();
+    const disabled = status === 'loading' || status === 'success';
 
     const { onSubmit, getInputProps, setFieldValue } = useForm<LoginData>({
         validate: {
-            username: (value) =>
-                z.string().min(1).safeParse(value).success
-                    ? null
-                    : 'Please enter your username or email address!',
-            password: (value) =>
-                z.string().min(1).safeParse(value).success ? null : 'Please enter your password!',
+            username: getValidationMessage((v) => ({
+                'Please enter your username or email!': !!v,
+            })),
+            password: getValidationMessage((v) => ({
+                'Please enter your password!': !!v,
+            })),
         },
     });
 
@@ -61,38 +62,48 @@ const Form: FC = () => {
                 {error && <p className="!-mt-4 font-semibold text-red-500 mx-2 !mb-2">{error}</p>}
                 {status === 'success' && (
                     <p className="!-mt-4 font-semibold text-emerald-600 mx-2 !mb-2">
-                        Login successful, you&apos;ll be redirect shortly
+                        Login successful, you&apos;ll be redirected shortly
                     </p>
                 )}
                 <Input
                     name="username"
                     placeholder="Enter username or email address"
-                    disabled={status === 'loading'}
+                    disabled={disabled}
                     {...getInputProps('username')}
                     required
                 />
 
-                <Input
-                    name="password"
-                    type="password"
-                    disabled={status === 'loading'}
-                    placeholder="Enter password"
-                    {...getInputProps('password')}
-                    required
-                    togglePassword
-                />
+                <div className="flex flex-col space-y-2">
+                    <Input
+                        name="password"
+                        type="password"
+                        disabled={disabled}
+                        placeholder="Enter password"
+                        {...getInputProps('password')}
+                        required
+                        togglePassword
+                    />
+
+                    <Link
+                        href="/forgot-password"
+                        onClick={(event) => disabled && event.preventDefault()}
+                        className="mr-2.5 text-xs text-right text-white hover:underline"
+                    >
+                        Forgot Password?
+                    </Link>
+                </div>
 
                 <div className="flex items-center justify-between pt-4 space-x-1">
                     <button
                         type="submit"
-                        disabled={status === 'loading'}
-                        className="relative inline-flex items-center justify-center h-10 px-8 font-bold text-white transition border-2 rounded-full max-w-max group/btn bg-primary border-primary"
+                        disabled={disabled}
+                        className="relative inline-flex items-center justify-center h-10 px-8 font-bold text-white transition-colors rounded-full max-w-max bg-primary hover:bg-blue-500"
                     >
                         Sign In
                     </button>
-
                     <Link
                         href="/register"
+                        onClick={(event) => disabled && event.preventDefault()}
                         className="relative inline-flex items-center justify-center h-10 px-2 font-bold text-black rounded-full max-w-max group/btn dark:text-white hover:underline "
                     >
                         Sign up instead
