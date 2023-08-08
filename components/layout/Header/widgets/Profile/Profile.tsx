@@ -71,7 +71,7 @@ const Profile: FC = () => {
                         </div>
                         <div className="flex-1">
                             <div className="flex flex-col text-shadow">
-                                <span className="font-bold text-white">John Doe</span>
+                                <span className="font-bold text-white">{user!.name}</span>
                                 <span className="text-xs text-gray-200">Sword Wielder</span>
                             </div>
                         </div>
