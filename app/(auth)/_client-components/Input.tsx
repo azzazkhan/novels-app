@@ -1,8 +1,6 @@
 'use client';
 
 import {
-    ChangeEvent,
-    ChangeEventHandler,
     DetailedHTMLProps,
     ForwardRefRenderFunction,
     InputHTMLAttributes,
@@ -25,25 +23,14 @@ interface Props
     className?: ClassName;
     error?: ReactNode;
     togglePassword?: boolean;
-    onChange?: ChangeEventHandler<HTMLInputElement>;
-    onUpdate?: (val: string, event: ChangeEvent<HTMLInputElement>) => void;
+    hint?: string;
 }
 
 const Input: ForwardRefRenderFunction<HTMLInputElement, Props> = (
-    {
-        className,
-        error,
-        togglePassword,
-        type: inputType,
-        value: inputValue,
-        onChange,
-        onUpdate,
-        ...props
-    },
+    { className, error, togglePassword, type: inputType, hint, ...props },
     ref
 ) => {
     const id = useId();
-    const [value, setValue] = useState(inputValue || '');
     const [type, setType] = useState<Props['type']>(inputType || 'text');
     const [toggled, toggle] = useToggle([true, false]);
 
@@ -55,27 +42,21 @@ const Input: ForwardRefRenderFunction<HTMLInputElement, Props> = (
         setType((current) => (current === 'password' ? 'text' : 'password'));
     };
 
-    const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-        setValue(event.target.value);
-
-        // If change listener is provided then provide the value as well as the
-        // triggered event
-        onChange && onChange(event);
-        onUpdate && onUpdate(event.target.value, event);
-    };
-
     return (
         <div className="flex flex-col">
             <div className="relative group">
                 <input
                     id={props.id || id}
                     type={type}
-                    onChange={handleChange}
                     className={classNames(
-                        'bg-gray-200 font-semibold block h-11 w-full px-5 border-2 border-transparent rounded-full transition-colors focus:bg-white focus:border-primary dark:bg-gray-900 dark:focus:bg-white dark:focus:border-transparent dark:focus:text-black dark:text-gray-200',
+                        {
+                            'bg-gray-900 font-semibold block h-11 w-full px-5 border-2 rounded-full transition-colors focus:bg-white':
+                                true,
+                            'text-red-500 border-red-500': error,
+                            'text-white focus:text-black border-transparent': !error,
+                        },
                         className
                     )}
-                    value={value}
                     {...props}
                     ref={ref}
                 />
@@ -95,7 +76,8 @@ const Input: ForwardRefRenderFunction<HTMLInputElement, Props> = (
                 )}
             </div>
 
-            {error && <div className="mx-2 font-semibold text-red-500">{error}</div>}
+            {error && <div className="mx-2 mt-1 text-sm font-semibold text-red-500">{error}</div>}
+            {hint && <div className="mx-2 mt-1 text-sm font-semibold text-gray-500">{hint}</div>}
         </div>
     );
 };
