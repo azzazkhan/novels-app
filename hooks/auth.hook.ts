@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/react';
 
 interface Props {
     authOnly?: boolean;
+    guestOnly?: boolean;
 }
 
 export const useAuth = (props: Props = {}) => {
@@ -26,11 +27,16 @@ export const useAuth = (props: Props = {}) => {
 
     // eslint-disable-next-line consistent-return
     useEffect(() => {
-        const { authOnly } = props;
+        if (sessionStatus === 'loading') return () => {};
+
+        const { authOnly, guestOnly } = props;
+        if (guestOnly && sessionStatus === 'authenticated') return router.push('/');
+
+        if (loading) return () => {};
         const url = encodeURIComponent(pathname + (searchParams ? `?${searchParams}` : ''));
 
-        if (authOnly && !loading && !user) return router.push(`/login?redirect=${url}`);
-    }, [router, pathname, searchParams, loading, user, props]);
+        if (authOnly && !user) return router.push(`/login?redirect=${url}`);
+    }, [router, pathname, searchParams, loading, user, props, sessionStatus]);
 
     return { user, loading: loading || sessionStatus === 'loading', logout };
 };

@@ -10,6 +10,7 @@ import { z } from 'zod';
 import { getErrorFactory, getErrorMessage, getValidationMessage, isValidationError } from 'utils';
 import { useAxios } from 'hooks';
 import { Input } from '../_client-components';
+import classNames from 'classnames';
 
 type SignUpData = { name: string; username: string; email: string; password: string };
 
@@ -140,14 +141,24 @@ const Form: FC = () => {
                     <button
                         type="submit"
                         disabled={disabled}
-                        className="relative inline-flex items-center justify-center h-10 px-8 font-bold text-white transition-colors rounded-full cursor-pointer max-w-max bg-primary hover:bg-blue-500"
+                        className={classNames({
+                            'relative inline-flex items-center justify-center h-10 px-8 font-bold transition-colors rounded-full max-w-max':
+                                true,
+                            'text-white bg-primary hover:bg-blue-500': !disabled,
+                            'bg-gray-500 text-black': disabled,
+                        })}
                     >
                         Sign Up
                     </button>
                     <Link
                         href="/login"
                         onClick={(event) => disabled && event.preventDefault()}
-                        className="relative inline-flex items-center justify-center h-10 px-2 font-bold text-black rounded-full max-w-max group/btn dark:text-white hover:underline "
+                        className={classNames({
+                            'relative inline-flex items-center justify-center h-10 px-2 font-bold rounded-full max-w-max group/btn':
+                                true,
+                            'text-white hover:underline': !disabled,
+                            'text-gray-500 pointer-events-none': disabled,
+                        })}
                     >
                         Sign in instead
                     </Link>

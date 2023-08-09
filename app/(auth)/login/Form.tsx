@@ -7,6 +7,7 @@ import { signIn } from 'next-auth/react';
 import { useForm } from '@mantine/form';
 import { getValidationMessage } from 'utils';
 import { Input, SocialIcons } from '../_client-components';
+import classNames from 'classnames';
 
 type LoginData = { username: string; password: string };
 
@@ -34,7 +35,7 @@ const Form: FC = () => {
         setError(undefined);
 
         const { username, password } = data;
-        const callbackUrl = decodeURIComponent(searchParams?.get('redirectTo') || '') || '/';
+        const callbackUrl = decodeURIComponent(searchParams?.get('redirect') || '') || '/';
 
         signIn('credentials', { username, password, callbackUrl, redirect: false })
             .then((res) => {
@@ -87,7 +88,11 @@ const Form: FC = () => {
                     <Link
                         href="/forgot-password"
                         onClick={(event) => disabled && event.preventDefault()}
-                        className="mr-2.5 text-xs text-right text-white hover:underline"
+                        className={classNames({
+                            'mr-2.5 text-xs text-right': true,
+                            'text-white hover:underline': !disabled,
+                            'text-gray-500 pointer-events-none': disabled,
+                        })}
                     >
                         Forgot Password?
                     </Link>
@@ -97,14 +102,24 @@ const Form: FC = () => {
                     <button
                         type="submit"
                         disabled={disabled}
-                        className="relative inline-flex items-center justify-center h-10 px-8 font-bold text-white transition-colors rounded-full max-w-max bg-primary hover:bg-blue-500"
+                        className={classNames({
+                            'relative inline-flex items-center justify-center h-10 px-8 font-bold transition-colors rounded-full max-w-max':
+                                true,
+                            'text-white bg-primary hover:bg-blue-500': !disabled,
+                            'bg-gray-500 text-black': disabled,
+                        })}
                     >
                         Sign In
                     </button>
                     <Link
                         href="/register"
                         onClick={(event) => disabled && event.preventDefault()}
-                        className="relative inline-flex items-center justify-center h-10 px-2 font-bold text-black rounded-full max-w-max group/btn dark:text-white hover:underline "
+                        className={classNames({
+                            'relative inline-flex items-center justify-center h-10 px-2 font-bold rounded-full max-w-max group/btn':
+                                true,
+                            'text-white hover:underline': !disabled,
+                            'text-gray-500 pointer-events-none': disabled,
+                        })}
                     >
                         Sign up instead
                     </Link>
