@@ -1,13 +1,13 @@
 import type { FC, ReactNode } from 'react';
 import NextTopLoader from 'nextjs-toploader';
 import { MantineProvider, ReduxProvider, SessionProvider } from 'providers';
+import { Middleware } from 'components/middleware';
 import { Screen } from './_components';
 import { nunito } from './_fonts';
 import classNames from 'classnames';
 
 import 'styles/tailwind.css';
 import 'styles/app.scss';
-import { Middleware } from 'components/middleware';
 
 interface Props {
     children?: ReactNode;

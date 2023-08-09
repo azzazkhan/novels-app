@@ -15,6 +15,7 @@ import Badge from './Badge';
 import items from './items';
 import { useAuth } from 'hooks';
 import { signOut } from 'next-auth/react';
+import BecomeAuthorLink from './BecomeAuthorLink';
 
 const Profile: FC = () => {
     const { user } = useAuth();
@@ -93,6 +94,7 @@ const Profile: FC = () => {
                 </div>
 
                 <div className="flex flex-col">
+                    <BecomeAuthorLink />
                     {items.map(({ label, url, badge }, idx) => {
                         return (
                             <Link
