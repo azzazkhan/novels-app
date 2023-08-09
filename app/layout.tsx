@@ -15,7 +15,7 @@ interface Props {
 
 const RootLayout: FC<Props> = ({ children }) => {
     return (
-        <html lang="en">
+        <html lang="en" suppressHydrationWarning>
             <body
                 className={classNames(nunito.className)}
                 style={{ minHeight: '100vh', overflowX: 'hidden', width: '100vw' }}

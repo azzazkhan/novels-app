@@ -5,11 +5,12 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+    darkMode: 'class',
     content: [
-        'pages/**/*.{ts,tsx}',
-        'components/**/*.{ts,tsx}',
-        'layouts/**/*.{ts,tsx}',
-        'app/**/*.{ts,tsx,mdx}',
+        './pages/**/*.{ts,tsx}',
+        './components/**/*.{ts,tsx}',
+        './app/**/*.{ts,tsx}',
+        './src/**/*.{ts,tsx}',
     ],
     theme: {
         container: {
@@ -58,15 +59,25 @@ module.exports = {
                     '0%': { backgroundPosition: 'var(--skeleton-start)' },
                     '60%, 100%': { backgroundPosition: 'var(--skeleton-end)' },
                 },
+                'accordion-down': {
+                    from: { height: 0 },
+                    to: { height: 'var(--radix-accordion-content-height)' },
+                },
+                'accordion-up': {
+                    from: { height: 'var(--radix-accordion-content-height)' },
+                    to: { height: 0 },
+                },
             },
             animation: {
                 pop: 'pop 300ms ease',
                 shine: 'shine 2s infinite linear',
+                'accordion-down': 'accordion-down 0.2s ease-out',
+                'accordion-up': 'accordion-up 0.2s ease-out',
             },
         },
     },
     future: {
         hoverOnlyWhenSupported: true,
     },
-    plugins: [require('@tailwindcss/typography')],
+    plugins: [require('@tailwindcss/typography'), require('tailwindcss-animate')],
 };
