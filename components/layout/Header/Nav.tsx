@@ -11,7 +11,7 @@ import Search from './widgets/Search';
 import NavItem from './NavItem';
 import { useAppDispatch, useAppSelector, useAuth } from 'hooks';
 import { useEventListener } from '@mantine/hooks';
-import { toggleNavbar } from 'store/slices';
+import { toggleDashboardSidebar } from 'store/slices';
 
 const Nav: FC = () => {
     const { user, loading: userLoading } = useAuth();
@@ -24,7 +24,7 @@ const Nav: FC = () => {
 
         event.stopPropagation(); // Prevent from bubbling up the DOM tree
         event.preventDefault(); // Prevent any redirects
-        dispatch(toggleNavbar(false));
+        dispatch(toggleDashboardSidebar(false));
     });
 
     return (
@@ -51,7 +51,7 @@ const Nav: FC = () => {
                     <NavItem href="/rankings" icon={faBarsStaggered}>
                         Rankings
                     </NavItem>
-                    <NavItem href="/create" icon={faPenNib}>
+                    <NavItem href="/dashboard" icon={faPenNib}>
                         Create
                     </NavItem>
                 </ul>

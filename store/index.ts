@@ -1,11 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { auth, layout, search } from './slices';
+import { auth, layout, search, dashboard } from './slices';
 
 export const store = configureStore({
     reducer: {
         auth,
         layout,
         search,
+        dashboard,
     },
     devTools: process.env.NODE_ENV !== 'production',
 });

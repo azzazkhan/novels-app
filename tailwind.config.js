@@ -39,6 +39,7 @@ module.exports = {
                 primary: '#2563EB',
             },
             spacing: {
+                4.5: '1.125rem',
                 18: '4.5rem',
                 22: '5.5rem',
                 76: '19rem',

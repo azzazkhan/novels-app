@@ -18,7 +18,7 @@ const Screen: FC = () => {
     })();
 
     return (
-        <div className={styles.wrapper}>
+        <div className={styles.wrapper} id="screenHelper">
             <span>
                 {width} &times; {height}
             </span>

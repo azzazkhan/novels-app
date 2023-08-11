@@ -20,6 +20,9 @@ declare global {
             readonly SYSTEM_API_TOKEN?: string;
             readonly NEXTAUTH_SECRET?: string;
             readonly NEXTAUTH_URL?: string;
+
+            // Dev configurations
+            readonly DISABLE_SCREEN_SIZE_HELPER?: boolean;
         }
     }
 

@@ -2,7 +2,7 @@
 
 import type { FC, MouseEventHandler } from 'react';
 import { useAppDispatch, useAppSelector } from 'hooks';
-import { toggleNavbar } from 'store/slices';
+import { toggleDashboardSidebar } from 'store/slices';
 import classNames from 'classnames';
 
 const Hamburger: FC = () => {
@@ -12,7 +12,7 @@ const Hamburger: FC = () => {
     const handleToggle: MouseEventHandler<HTMLButtonElement> = (event) => {
         event.preventDefault();
 
-        dispatch(toggleNavbar());
+        dispatch(toggleDashboardSidebar());
     };
 
     // const [toggled, setToggled] = useState(false);

@@ -35,7 +35,7 @@ const RootLayout: FC<Props> = ({ children }) => {
                                 speed={200}
                                 shadow="0 0 10px #2563EB,0 0 5px #2563EB"
                             />
-                            <Screen />
+                            {process.env.DISABLE_SCREEN_SIZE_HELPER ? null : <Screen />}
                             {children}
                         </MantineProvider>
                     </SessionProvider>
