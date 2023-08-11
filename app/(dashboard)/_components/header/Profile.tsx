@@ -1,14 +1,20 @@
 'use client';
 
 import { FC } from 'react';
-import { Button } from 'components/ui/button';
-import { UserCircle2 } from 'lucide-react';
+import { Avatar, AvatarImage } from 'components/ui/avatar';
+import { useAuth } from 'hooks';
+import avatar from 'assets/icons/avatar.jpg';
 
 const Profile: FC = () => {
+    const { loading, user } = useAuth();
+
     return (
-        <Button variant="outline" size="icon">
-            <UserCircle2 className="w-4.5 h-4.5" />
-        </Button>
+        <Avatar>
+            {loading && <div className="w-11 h-11 skeleton" />}
+            {!loading && user && (
+                <AvatarImage src={user.profile.avatar || avatar.src} alt={user.name} />
+            )}
+        </Avatar>
     );
 };
 
