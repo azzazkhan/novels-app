@@ -5,7 +5,7 @@ import type { Author, Profile, User } from 'types/resources';
 import type { AxiosResponse } from 'axios';
 import { useAppDispatch, useAppSelector, useAxios } from 'hooks';
 import { setAuthStatus, setUser } from 'store/slices';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 
 interface AuthState extends User {
     profile: Profile;
@@ -51,7 +51,14 @@ const AuthMiddleware: FC = () => {
                 dispatch(setAuthStatus('success'));
                 dispatch(setUser(res.data));
             })
-            .catch(() => dispatch(setAuthStatus('error')));
+            .catch(() => {
+                dispatch(setAuthStatus('error'));
+
+                // If token is defined and we cannot fetch the session then it
+                // means that either the token is expired or the user record
+                // is updated/deleted form the server. Signing out the user
+                signOut({ callbackUrl: '/login', redirect: true }).catch(() => {});
+            });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch, user, session, sessionStatus]);
 
