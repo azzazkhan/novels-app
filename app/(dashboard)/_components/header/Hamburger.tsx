@@ -21,7 +21,7 @@ const Hamburger: FC = () => {
             type="button"
             onClick={handleHamburgerClick}
             className={classNames({
-                'text-black dark:text-gray-100 h-10 w-10 inline-flex items-center justify-center rounded-full transition-colors':
+                'text-black dark:text-gray-100 h-10 w-10 inline-flex items-center justify-center rounded-full transition-colors flex-shrink-0 md:hidden':
                     true,
                 'hover:bg-gray-100 dark:hover:bg-gray-800': !sidebarOpened,
                 'bg-gray-200 dark:bg-gray-700': sidebarOpened,

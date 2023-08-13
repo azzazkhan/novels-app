@@ -10,7 +10,7 @@ import Notifications from './Notifications';
 
 const Header: FC = () => {
     return (
-        <header className="grid w-full h-16 grid-cols-10 border-b border-gray-200 shadow dark:border-gray-700">
+        <header className="grid flex-shrink-0 w-full h-16 grid-cols-10 border-b border-gray-200 shadow dark:border-gray-700 dark:bg-gray-900">
             <div className="flex items-center col-span-3 px-4 space-x-4 lg:col-span-2">
                 <Hamburger />
                 <Link href="/dashboard" className="text-2xl font-bold text-primary dark:text-white">

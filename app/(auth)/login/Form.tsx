@@ -35,7 +35,8 @@ const Form: FC = () => {
         setError(undefined);
 
         const { username, password } = data;
-        const callbackUrl = decodeURIComponent(searchParams?.get('redirect') || '') || '/';
+        const redirectUrl = searchParams?.get('callbackUrl') || searchParams?.get('redirect');
+        const callbackUrl = decodeURIComponent(redirectUrl || '') || '/';
 
         signIn('credentials', { username, password, callbackUrl, redirect: false })
             .then((res) => {

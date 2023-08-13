@@ -11,7 +11,7 @@ interface Props {
 const DashboardLayout: FC<Props> = ({ children }) => {
     return (
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <div className="flex flex-col w-full min-h-screen dark:bg-gray-900">
+            <div className="flex flex-col w-full h-screen dark:bg-gray-800">
                 <Header />
                 <div className="grid flex-1 grid-cols-10">
                     <Sidebar />
