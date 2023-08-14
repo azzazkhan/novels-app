@@ -12,14 +12,15 @@ import {
 } from 'lucide-react';
 import classNames from 'classnames';
 import { useAppSelector } from 'hooks';
+import NavItem from './NavItem';
 
-type Item = { icon: LucideIcon; label: string; active?: boolean };
+type Item = { icon: LucideIcon; label: string; href?: string };
 const items: Item[] = [
-    { icon: LayoutDashboard, label: 'Home', active: true },
-    { icon: BookOpen, label: 'My Novels' },
-    { icon: Heart, label: 'Reactions' },
-    { icon: CircleDollarSign, label: 'Earnings' },
-    { icon: User2, label: 'Author Profile' },
+    { icon: LayoutDashboard, label: 'Home', href: '/' },
+    { icon: BookOpen, label: 'My Novels', href: '/novels' },
+    { icon: Heart, label: 'Reactions', href: '/reactions' },
+    { icon: CircleDollarSign, label: 'Earnings', href: '/earnings' },
+    { icon: User2, label: 'Author Profile', href: '/profile' },
 ];
 
 const Sidebar: FC = () => {
@@ -37,23 +38,8 @@ const Sidebar: FC = () => {
             <div className="w-full h-full py-4 border-r border-gray-200 dark:border-gray-700">
                 <ScrollArea className="w-full h-full pr-4">
                     <div className="flex flex-col space-y-2">
-                        {items.map(({ icon: Icon, label, active }, idx) => {
-                            return (
-                                <a
-                                    className={classNames({
-                                        'flex items-center w-full h-12 pl-6 pr-4 space-x-2 rounded-r-full transition-colors cursor-pointer':
-                                            true,
-                                        'font-bold text-white bg-primary dark:bg-primary/20':
-                                            active,
-                                        'dark:text-gray-400 hover:bg-primary/20 hover:text-blue-800 dark:hover:bg-primary/10 dark:hover:text-white':
-                                            !active,
-                                    })}
-                                    key={idx}
-                                >
-                                    <Icon className="w-4 h-4" />
-                                    <span className="font-semibold">{label}</span>
-                                </a>
-                            );
+                        {items.map(({ icon, label, href }, idx) => {
+                            return <NavItem icon={icon} label={label} href={href} key={idx} />;
                         })}
                     </div>
                 </ScrollArea>

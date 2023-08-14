@@ -20,7 +20,10 @@ const Header: FC = () => {
             <div className="flex items-center col-span-7 px-4 space-x-4 lg:col-span-8">
                 <div className="flex items-center flex-1 h-full">
                     <div className="items-center hidden w-full max-w-xl space-x-4 md:flex">
-                        <Input placeholder="Search for items and settings" />
+                        <Input
+                            className="pl-8 pr-4 rounded-full h-11"
+                            placeholder="Search for items and settings"
+                        />
                     </div>
                 </div>
                 <div className="flex items-center space-x-2">

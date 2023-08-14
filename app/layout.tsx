@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from 'react';
 import NextTopLoader from 'nextjs-toploader';
-import { MantineProvider, ReduxProvider, SessionProvider } from 'providers';
+import { MantineProvider, ReduxProvider, SessionProvider, ThemeProvider } from 'providers';
 import { Middleware } from 'components/middleware';
 import { Screen } from './_components';
 import { nunito } from './_fonts';
@@ -24,19 +24,21 @@ const RootLayout: FC<Props> = ({ children }) => {
                     <SessionProvider>
                         <Middleware />
                         <MantineProvider>
-                            <NextTopLoader
-                                color="#2563EB"
-                                initialPosition={0.08}
-                                crawlSpeed={200}
-                                height={3}
-                                crawl
-                                showSpinner={false}
-                                easing="ease"
-                                speed={200}
-                                shadow="0 0 10px #2563EB,0 0 5px #2563EB"
-                            />
-                            {process.env.DISABLE_SCREEN_SIZE_HELPER ? null : <Screen />}
-                            {children}
+                            <ThemeProvider>
+                                <NextTopLoader
+                                    color="#2563EB"
+                                    initialPosition={0.08}
+                                    crawlSpeed={200}
+                                    height={3}
+                                    crawl
+                                    showSpinner={false}
+                                    easing="ease"
+                                    speed={200}
+                                    shadow="0 0 10px #2563EB,0 0 5px #2563EB"
+                                />
+                                {process.env.DISABLE_SCREEN_SIZE_HELPER ? null : <Screen />}
+                                {children}
+                            </ThemeProvider>
                         </MantineProvider>
                     </SessionProvider>
                 </ReduxProvider>
