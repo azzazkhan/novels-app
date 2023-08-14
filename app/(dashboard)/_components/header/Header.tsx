@@ -7,6 +7,7 @@ import ThemeToggler from './ThemeToggler';
 import { Input } from 'components/ui/input';
 import Hamburger from './Hamburger';
 import Notifications from './Notifications';
+import { Search } from 'lucide-react';
 
 const Header: FC = () => {
     return (
@@ -18,10 +19,11 @@ const Header: FC = () => {
                 </Link>
             </div>
             <div className="flex items-center col-span-7 px-4 space-x-4 lg:col-span-8">
-                <div className="flex items-center flex-1 h-full">
-                    <div className="items-center hidden w-full max-w-xl space-x-4 md:flex">
+                <div className="flex items-center justify-center flex-1 h-full">
+                    <div className="relative items-center hidden w-full max-w-xl space-x-4 md:flex">
+                        <Search className="absolute w-4 h-4 text-gray-500 transform -translate-y-1/2 top-1/2 left-8" />
                         <Input
-                            className="pl-8 pr-4 rounded-full h-11"
+                            className="pl-10 pr-4 rounded-full h-11"
                             placeholder="Search for items and settings"
                         />
                     </div>
