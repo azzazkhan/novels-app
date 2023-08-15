@@ -57,7 +57,7 @@ const AuthMiddleware: FC = () => {
                 // If token is defined and we cannot fetch the session then it
                 // means that either the token is expired or the user record
                 // is updated/deleted form the server. Signing out the user
-                signOut({ callbackUrl: '/login', redirect: true }).catch(() => {});
+                signOut({ callbackUrl: '/', redirect: true }).catch(() => {});
             });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch, user, session, sessionStatus]);
