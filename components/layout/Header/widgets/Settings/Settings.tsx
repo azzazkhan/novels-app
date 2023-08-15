@@ -4,30 +4,20 @@ import { FC, MouseEventHandler, useState } from 'react';
 import Image from 'next/image';
 import { useClickOutside } from '@mantine/hooks';
 import { RadioGroup } from '@headlessui/react';
-import { useAppDispatch, useAppSelector } from 'hooks';
-import { toggleDarkMode } from 'store/slices';
 import Dropdown from '../Dropdown';
 import DarkModeToggler from './DarkModeToggler';
 import SelectionAction from './SelectionAction';
 import settings from 'assets/icons/settings.svg';
 
 const Settings: FC = () => {
-    const dispatch = useAppDispatch();
     const [opened, setOpened] = useState(false);
     const ref = useClickOutside(() => setOpened(false));
-    const darkMode = useAppSelector((state) => state.layout.darkMode);
     const [preference, setPreference] = useState('');
 
     const handleTriggerClick: MouseEventHandler<HTMLButtonElement> = (event) => {
         event.preventDefault();
 
         setOpened((current) => !current);
-    };
-
-    const handleDarkModeClick: MouseEventHandler<HTMLAnchorElement> = (event) => {
-        event.preventDefault();
-
-        dispatch(toggleDarkMode(!darkMode));
     };
 
     return (
@@ -41,7 +31,7 @@ const Settings: FC = () => {
             </button>
 
             <Dropdown opened={opened} className="py-2.5 lg:min-w-[20rem]">
-                <DarkModeToggler enabled={darkMode} toggle={handleDarkModeClick} />
+                <DarkModeToggler />
 
                 <div className="flex flex-col mt-4 space-y-1">
                     <span className="px-5 text-sm text-gray-500">Reading Preference</span>

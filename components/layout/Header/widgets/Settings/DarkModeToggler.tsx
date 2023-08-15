@@ -1,19 +1,27 @@
+/* eslint-disable jsx-a11y/interactive-supports-focus */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import type { FC, MouseEventHandler } from 'react';
 import classNames from 'classnames';
 import { Switch } from '@headlessui/react';
+import { useTheme } from 'hooks';
 
-interface Props {
-    toggle: MouseEventHandler<HTMLAnchorElement>;
-    enabled: boolean;
-}
+const DarkModeToggler: FC = () => {
+    const { theme, setTheme } = useTheme();
 
-const DarkModeToggler: FC<Props> = ({ enabled, toggle }) => {
+    const enabled = theme === 'dark';
+
+    const handleClick: MouseEventHandler<HTMLAnchorElement> = (event) => {
+        event.preventDefault();
+
+        setTheme();
+    };
+
     return (
         <a
             role="button"
-            href="#"
             className="flex items-center justify-between py-2.5 px-5 transition-colors hover:bg-gray-50"
-            onClick={toggle}
+            onClick={handleClick}
         >
             <span>Dark Mode</span>
             <Switch
