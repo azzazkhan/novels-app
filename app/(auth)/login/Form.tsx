@@ -20,6 +20,10 @@ const Form: FC = () => {
     const disabled = status === 'loading' || status === 'success';
 
     const { onSubmit, getInputProps, setFieldValue } = useForm<LoginData>({
+        initialValues: {
+            username: 'azzazkhan',
+            password: '$Azzazkhan2003',
+        },
         validate: {
             username: getValidationMessage((v) => ({
                 'Please enter your username or email!': !!v,
@@ -38,12 +42,14 @@ const Form: FC = () => {
         const redirectUrl = searchParams?.get('callbackUrl') || searchParams?.get('redirect');
         const callbackUrl = decodeURIComponent(redirectUrl || '') || '/';
 
-        signIn('credentials', { username, password, callbackUrl, redirect: false })
+        signIn('credentials', { username, password, redirect: false })
             .then((res) => {
                 if (res?.ok) {
                     setStatus('success');
 
-                    router.push(res.url || '/');
+                    console.log(`Redirecting to callback url: ${callbackUrl}`);
+
+                    router.push(callbackUrl);
                     return;
                 }
 
