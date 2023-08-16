@@ -20,10 +20,6 @@ const Form: FC = () => {
     const disabled = status === 'loading' || status === 'success';
 
     const { onSubmit, getInputProps, setFieldValue } = useForm<LoginData>({
-        initialValues: {
-            username: 'azzazkhan',
-            password: '$Azzazkhan2003',
-        },
         validate: {
             username: getValidationMessage((v) => ({
                 'Please enter your username or email!': !!v,
@@ -46,8 +42,6 @@ const Form: FC = () => {
             .then((res) => {
                 if (res?.ok) {
                     setStatus('success');
-
-                    console.log(`Redirecting to callback url: ${callbackUrl}`);
 
                     router.push(callbackUrl);
                     return;

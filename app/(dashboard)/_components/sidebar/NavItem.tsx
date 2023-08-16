@@ -12,13 +12,15 @@ interface Props {
     icon: LucideIcon;
     label: string;
     href?: string;
+    prefix?: string;
 }
 
-const NavItem: FC<Props> = ({ icon: Icon, label, href }) => {
+const NavItem: FC<Props> = ({ icon: Icon, label, href, prefix }) => {
     href = href ? (href === '/' ? '/dashboard' : `/dashboard${href}`) : href;
 
     const pathname = usePathname();
-    const active = pathname === href;
+    const active =
+        pathname === href || (prefix ? pathname?.startsWith(`/dashboard${prefix}`) : false);
 
     const handleClick: MouseEventHandler<HTMLAnchorElement> = (event) => {
         event.preventDefault();
