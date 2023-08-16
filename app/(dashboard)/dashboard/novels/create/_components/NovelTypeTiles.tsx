@@ -13,7 +13,7 @@ type NovelType = 'original' | 'fan-fic';
 const options: Record<NovelType, { image: StaticImageData; label: string }> = {
     original: {
         image: originalStoriesBackground,
-        label: 'Original Stories',
+        label: 'Original Story',
     },
     'fan-fic': {
         image: fanArtBackground,

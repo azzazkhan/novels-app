@@ -1,2 +1,9 @@
 export { default as Thumbnail } from './Thumbnail';
 export { default as NovelTypeTiles } from './NovelTypeTiles';
+export { default as GenreSelector } from './GenreSelector';
+export { default as LeadSelector } from './LeadSelector';
+export { default as LengthSelector } from './LengthSelector';
+export { default as LanguageSelector } from './LanguageSelector';
+export { default as WarningSelector } from './WarningSelector';
+export { default as CategorySelector } from './CategorySelector';
+export { default as Tags } from './Tags';

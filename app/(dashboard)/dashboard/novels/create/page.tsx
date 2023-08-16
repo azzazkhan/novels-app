@@ -1,14 +1,17 @@
 import { FC, Fragment } from 'react';
-import { Thumbnail, NovelTypeTiles } from './_components';
+import {
+    Thumbnail,
+    NovelTypeTiles,
+    GenreSelector,
+    LeadSelector,
+    LengthSelector,
+    LanguageSelector,
+    WarningSelector,
+    CategorySelector,
+    Tags,
+} from './_components';
 import { Label } from 'components/ui/label';
 import { Input } from 'components/ui/input';
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from 'components/ui/select';
 
 const CreateNovel: FC = () => {
     return (
@@ -24,10 +27,15 @@ const CreateNovel: FC = () => {
                 </p>
             </div>
             <div className="grid grid-cols-12 gap-10 h-96">
-                <div className="flex flex-col col-span-7 space-y-6 dark:bg-red-900/10">
+                <div className="flex flex-col col-span-7 space-y-6">
                     <div className="flex flex-col space-y-1.5">
                         <Label htmlFor="name">Name</Label>
-                        <Input type="text" id="name" placeholder="Enter novel name" />
+                        <Input
+                            type="text"
+                            id="name"
+                            className="text-sm"
+                            placeholder="Enter novel name"
+                        />
                     </div>
 
                     <div className="flex flex-col space-y-1.5">
@@ -35,29 +43,29 @@ const CreateNovel: FC = () => {
                         <Input
                             type="text"
                             id="abbreviation"
+                            className="text-sm"
                             placeholder="Enter novel abbreviation"
                         />
                     </div>
 
                     <NovelTypeTiles />
 
-                    <div className="flex flex-col space-y-1.5">
-                        <Label htmlFor="abbreviation">Genre</Label>
-                        <Select>
-                            <SelectTrigger className="w-full">
-                                <SelectValue placeholder="Select Genre" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="light">Light</SelectItem>
-                                <SelectItem value="dark">Dark</SelectItem>
-                                <SelectItem value="system">System</SelectItem>
-                            </SelectContent>
-                        </Select>
+                    <div className="grid gap-x-10 gap-y-6 md:grid-cols-2">
+                        <GenreSelector />
+                        <LeadSelector />
+                        <LengthSelector />
+                        <LanguageSelector />
                     </div>
+
+                    <CategorySelector />
+
+                    <Tags />
                 </div>
                 <div className="col-span-1" />
-                <div className="col-span-4">
+                <div className="flex flex-col col-span-4 space-y-6">
                     <Thumbnail />
+
+                    <WarningSelector />
                 </div>
             </div>
         </Fragment>

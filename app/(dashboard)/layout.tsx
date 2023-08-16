@@ -14,7 +14,7 @@ const DashboardLayout: FC<Props> = ({ children }) => {
             <Header />
             <div className="flex-1 md:grid md:grid-cols-10">
                 <Sidebar />
-                <div className="md:col-span-7 lg:col-span-8">
+                <div className="md:col-span-7 lg:col-span-8 h-[calc(100vh-4rem)] overflow-y-auto">
                     <Container className="py-4 sm:py-6 lg:mx-10 dark:text-gray-100">
                         {children}
                     </Container>
