@@ -12,6 +12,7 @@ import {
 } from './_components';
 import { Label } from 'components/ui/label';
 import { Input } from 'components/ui/input';
+import { Button } from 'components/ui/button';
 
 const CreateNovel: FC = () => {
     return (
@@ -26,7 +27,7 @@ const CreateNovel: FC = () => {
                     Publish new novel on {process.env.NEXT_PUBLIC_APP_NAME} and start earning.
                 </p>
             </div>
-            <div className="grid grid-cols-12 gap-10 h-96">
+            <form className="grid grid-cols-12 gap-10">
                 <div className="flex flex-col col-span-7 space-y-6">
                     <div className="flex flex-col space-y-1.5">
                         <Label htmlFor="name">Name</Label>
@@ -60,14 +61,23 @@ const CreateNovel: FC = () => {
                     <CategorySelector />
 
                     <Tags />
+
+                    <WarningSelector />
+
+                    <div className="flex items-center justify-end space-x-2">
+                        <Button variant="secondary" size="sm">
+                            Cancel
+                        </Button>
+                        <Button variant="primary" size="sm">
+                            Create Novel
+                        </Button>
+                    </div>
                 </div>
                 <div className="col-span-1" />
                 <div className="flex flex-col col-span-4 space-y-6">
                     <Thumbnail />
-
-                    <WarningSelector />
                 </div>
-            </div>
+            </form>
         </Fragment>
     );
 };

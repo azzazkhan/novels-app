@@ -28,7 +28,7 @@ const WarningSelector: FC = () => {
             <Label htmlFor="warning">Warnings</Label>
             <Select value={value} onValueChange={(value: Warning) => setValue(value)}>
                 <SelectTrigger id="warning" className="w-full">
-                    <SelectValue placeholder="Select Lead" />
+                    <SelectValue placeholder="Select Warning" />
                 </SelectTrigger>
                 <SelectContent>
                     {Object.entries(warnings).map(([warning, label]) => {
