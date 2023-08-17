@@ -24,7 +24,7 @@ const buttonVariants = cva(
                 grouped:
                     'px-5 py-2 text-gray-600 dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100 rounded-none',
                 'grouped-active':
-                    'px-5 py-2 text-gray-600 bg-gray-100 dark:bg-gray-800 dark:text-gray-300 rounded-none',
+                    'px-5 py-2 text-gray-600 bg-gray-100 cursor-default pointer-events-none dark:bg-gray-800 dark:text-gray-300 rounded-none',
             },
             size: {
                 default: 'h-10 px-4 py-2',
