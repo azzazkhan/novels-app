@@ -3,7 +3,9 @@ import Link from 'next/link';
 import { PlusCircle, Search } from 'lucide-react';
 import { Button } from 'components/ui/button';
 import { Input } from 'components/ui/input';
-import { Table } from './_components';
+import { Table, Cell } from 'components/custom/table';
+import novels from 'data/novels';
+import Image from 'next/image';
 
 const Novels: FC = () => {
     return (
@@ -64,9 +66,62 @@ const Novels: FC = () => {
                 </div>
             </div>
 
-            <div className="mt-4">
-                <Table />
-            </div>
+            <Table headings={['Image', 'Name', 'Status', 'Chapters', 'Earnings']}>
+                {novels.map((novel, idx) => {
+                    const { title, slug, image, completed } = novel;
+                    const categories = Object.values(novel.categories);
+
+                    return (
+                        <tr key={idx}>
+                            <Cell>
+                                <Image
+                                    src={image}
+                                    className="block h-20 rounded-lg w-14"
+                                    alt={title}
+                                />
+                            </Cell>
+                            <Cell className="font-semibold">
+                                <div className="flex flex-col space-y-2">
+                                    <Link
+                                        href={`/dashboard/novels/${slug}`}
+                                        className="focus:underline hover:underline"
+                                    >
+                                        {title}
+                                    </Link>
+                                    {categories.length > 0 && (
+                                        <div className="flex flex-wrap mt-2 text-xs">
+                                            {categories.slice(0, 4).map((name, idx) => {
+                                                return (
+                                                    <span key={idx}>
+                                                        {name}
+                                                        {idx < categories.length - 1 && (
+                                                            <>,&nbsp;</>
+                                                        )}
+                                                    </span>
+                                                );
+                                            })}
+                                        </div>
+                                    )}
+                                </div>
+                            </Cell>
+                            <Cell>
+                                {completed && (
+                                    <div className="inline px-3 py-1 text-sm font-normal rounded-full text-emerald-500 gap-x-2 bg-emerald-100/60 dark:bg-gray-800">
+                                        Completed
+                                    </div>
+                                )}
+                                {!completed && (
+                                    <div className="inline px-3 py-1 text-sm font-normal rounded-full text-rose-500 gap-x-2 bg-rose-100/60 dark:bg-gray-800">
+                                        Ongoing
+                                    </div>
+                                )}
+                            </Cell>
+                            <Cell>1,137</Cell>
+                            <Cell>N/A</Cell>
+                        </tr>
+                    );
+                })}
+            </Table>
 
             {/* <NotFound /> */}
         </Fragment>
